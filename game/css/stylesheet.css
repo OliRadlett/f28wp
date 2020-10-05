@@ -1,0 +1,30 @@
+body {
+
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+
+}
+
+#background {
+
+    position: absolute;
+    top: 0px;
+
+}
+
+#player {
+
+    position: absolute;
+    z-index: 10;
+
+}
+
+#playerPos {
+
+    position: absolute;
+    z-index: 10;
+    color: red;
+
+}
