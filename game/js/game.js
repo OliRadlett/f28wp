@@ -61,36 +61,67 @@ function getCoordinates(id) {
 
 function ContentDown(d) {
 
-    var obj = document.getElementById(d);
-	var currentPosition = parseInt(obj.style.top);
+    var items = document.body.getElementsByTagName("*");
 
-	obj.style.top = currentPosition + player.getSpeed +"px";
+    for (var i = 0, len = items.length; i < len; i++) {
+            
+        if (items[i].className !== "player") {
+    
+            var currentPosition = parseInt(items[i].style.top);
+            items[i].style.top = currentPosition + player.getSpeed +"px";
+    
+        }
+
+    }
 
 }
 
 function ContentUp(d) {
 
-    var obj = document.getElementById(d);
-	var currentPosition = parseInt(obj.style.top);
+    var items = document.body.getElementsByTagName("*");
 
-	obj.style.top = currentPosition + -player.getSpeed + "px";
+    for (var i = 0, len = items.length; i < len; i++) {
+            
+        if (items[i].className !== "player") {
+    
+            var currentPosition = parseInt(items[i].style.top);
+            items[i].style.top = currentPosition + -player.getSpeed + "px";
+        }
+
+    }
 
 }
 
 function ContentRight(d) {
 
-    var obj = document.getElementById(d);
-	var currentPosition = parseInt(obj.style.left);
+    var items = document.body.getElementsByTagName("*");
 
-	obj.style.left = currentPosition + player.getSpeed + "px";
+    for (var i = 0, len = items.length; i < len; i++) {
+            
+        if (items[i].className !== "player") {
+    
+            var currentPosition = parseInt(items[i].style.left);
+            items[i].style.left = currentPosition + player.getSpeed + "px";
+        
+        }
+
+    }
 
 }
 
 function ContentLeft(d) {
 
-    var obj = document.getElementById(d);
-	var currentPosition = parseInt(obj.style.left);
+    var items = document.body.getElementsByTagName("*");
 
-	obj.style.left = currentPosition + -player.getSpeed + "px";
+    for (var i = 0, len = items.length; i < len; i++) {
+            
+        if (items[i].className !== "player") {
+    
+            var currentPosition = parseInt(items[i].style.left);
+            items[i].style.left = currentPosition + -player.getSpeed + "px";
+        
+        }
+
+    }
 
 }
