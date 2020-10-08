@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server for f28wp game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OliRadlett/f28wp.git"
+  },
+  "author": "Oli Radlett",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OliRadlett/f28wp/issues"
+  },
+  "homepage": "https://github.com/OliRadlett/f28wp#readme"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "f28wp game client",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OliRadlett/f28wp.git"
+  },
+  "author": "Oli Radlett",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OliRadlett/f28wp/issues"
+  },
+  "homepage": "https://github.com/OliRadlett/f28wp#readme"
+}
