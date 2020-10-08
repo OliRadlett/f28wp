@@ -9,6 +9,7 @@ function start() {
 
 function update(delta) {
 
+
     // Player movement code
 
     if (UP) {
@@ -94,3 +95,4 @@ function ContentLeft(d) {
 	obj.style.left = currentPosition + -player.getSpeed + "px";
 
 }
+
