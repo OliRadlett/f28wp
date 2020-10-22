@@ -1,4 +1,4 @@
-Written by Haia Jihan (hj18)
+
 group: The dream team
 aim: MMO/RPG style game
 
@@ -19,3 +19,11 @@ Game idea:
 
 Game play ideas:
  Either shooter or swords  
+
+ Diago to do:
+ 1. making options page which links the start menu with an option html page 
+ 2. characters imagies 
+
+ Haia to do:
+ 1. link "start game" with an html page called character seclection
+ 2. building the character page
