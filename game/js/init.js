@@ -1,3 +1,5 @@
+// TODO Make a game class and add getters to remove all these crap globals
+
 let UP = false;
 let DOWN = false;
 let LEFT = false;
@@ -6,13 +8,21 @@ let RIGHT = false;
 let backgroundElement;
 let playerElement;
 
+// This isn't really the right place for these constants - should probably move them to game.js
+let centreY = ((window.innerHeight / 2) - 32);
+let centreX = ((window.innerWidth / 2) - 32);
+
+let webSocket;
+// All these globals make me feel ill
+// I'm so sorry about how bad this is I promise I'll make this better before I hand it in
+
 window.onload = () => {
 
     loadFromDOM();
     loadAssets();
     setupObjects();
     setupControls();
-    start();
+    initMultiplayer();
 
 };
 
@@ -33,13 +43,18 @@ function loadAssets() {
 function setupObjects() {
 
     // TODO make this lots better
+    // idk why this isnt in the respective classes but it really needs to be
 
     // Background
     backgroundElement.style.width = window.innerWidth + "px";
     backgroundElement.style.height = window.innerHeight + "px";
     // Player
-    playerElement.style.top = ((window.innerHeight / 2) - 32) + "px";
-    playerElement.style.left = ((window.innerWidth / 2) - 32) + "px";
+    // THIS REALLY NEEDS TO BE IN THE PLAYER CLASS THIS IS PRETTY BAD
+    
+    // Also these positions should be set by the server not hard coded
+    playerElement.style.top = "0px";
+    playerElement.style.left = "0px";
+    
     playerElement.style.width = 64 + "px";
     playerElement.style.height = 64 + "px";
     playerElement.style.backgroundRepeat = "no-repeat";
@@ -106,5 +121,32 @@ function setupControls() {
         }
 
     });
+
+}
+
+function initMultiplayer() {
+
+    // Very very basic
+    // All this will need redoing soon
+
+    webSocket = new WebSocket("ws://localhost:8080");
+
+    let playerID = Date.now();
+
+    webSocket.onopen = () => {
+        
+        // VERY TEMPORARY
+        let message = {
+
+            type: "clientConnected",
+            id: playerID
+
+        };
+
+        webSocket.send(JSON.stringify(message));
+
+        start(playerID);
+
+    };
 
 }

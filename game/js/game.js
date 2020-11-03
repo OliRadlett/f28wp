@@ -1,44 +1,130 @@
 let player;
+let clients = [];
 
-function start() {
+// PUT ALL OF THIS IN A CLASS ITS MESSY AS SHITE
 
-    player = new Player();
+function start(playerID) {
+
+    player = new Player(playerID);
     window.requestAnimationFrame(update);
+
+    // This shit has to be in a function or it gets executed before the websocket is ready
+    // But this is a very lazy place to put it, I'll probably move it at some point
+
+    setInterval(() => {
+
+        webSocket.send(JSON.stringify({
+            
+            type: "playerCoords",
+            id: player.getID,
+            x: player.getX,
+            y: player.getY
+
+        }));
+
+        // We use 1ms for LAN but we need this to be higher when the server is on the internet or it'll just lag
+    }, 1);
+
+    webSocket.onmessage = (message) => {
+
+        // TODO handle not JSON messages without crashing
+
+        message = JSON.parse(message.data);
+
+        switch (message.type) {
+
+            // TODO handle clients disconnecting
+
+            case "clientConnected":
+                
+                createClient({
+                    id: message.id,
+                    x: message.x,
+                    y: message.y
+                });
+
+            case "playerCoords":
+
+                for (let i = 0; i < clients.length; i++) {
+
+                    if (message.id == clients[i].id) {
+
+                        // TODO use setter functions
+                        clients[i].x = message.x;
+                        clients[i].y = message.y;
+
+                    }
+
+                }
+
+                break;
+
+            case "synchroniseClients":
+
+                for (let i = 0; i < message.clients.length; i++) {
+
+                    let client = message.clients[i];
+
+                    if (client.id != player.getID) {
+
+                        createClient({
+                            id: client.id,
+                            x: client.x,
+                            y: client.y
+                        });
+
+                    }
+
+                }
+                
+                break;
+
+        }
+
+    };
+
 
 }
 
 function update(delta) {
 
     // Player movement code
+    // This needs some work
+    // Might want to be moved around a bit but it works for now
 
     if (UP) {
 
         player.up();
-        ContentDown("background");
 
     }
 
     if (DOWN) {
 
         player.down();
-        ContentUp("background");
 
     }
 
     if (LEFT) {
 
         player.left();
-        ContentRight("background");
 
     }
 
     if (RIGHT) {
 
         player.right();
-        ContentLeft("background");
+
     }
 
-    // console.log(player.getX + " " + player.getY)
+
+    for (i = 0; i < clients.length; i++) {
+
+        clients[i].element.style.top = clients[i].getY + "px";
+        clients[i].element.style.left = clients[i].getX + "px";
+
+    }
+
+    window.scroll(player.getX - ((window.innerWidth / 2) - 32), player.getY - ((window.innerHeight / 2) - 32));
 
     window.requestAnimationFrame(update);
 
@@ -50,8 +136,6 @@ function getCoordinates(id) {
     let left = parseInt(element.style.left.replace("px", ""), 10);
     let top = parseInt(element.style.top.replace("px", ""), 10);
 
-    // Maybe do some world space calculations here
-
     return {
             left: left, 
             top: top
@@ -59,69 +143,10 @@ function getCoordinates(id) {
 
 }
 
-function ContentDown(d) {
 
-    var items = document.body.getElementsByTagName("*");
+// Not really sure why this function exists
+function createClient(client) {
 
-    for (var i = 0, len = items.length; i < len; i++) {
-            
-        if (items[i].className !== "player") {
-    
-            var currentPosition = parseInt(items[i].style.top);
-            items[i].style.top = currentPosition + player.getSpeed +"px";
-    
-        }
-
-    }
-
-}
-
-function ContentUp(d) {
-
-    var items = document.body.getElementsByTagName("*");
-
-    for (var i = 0, len = items.length; i < len; i++) {
-            
-        if (items[i].className !== "player") {
-    
-            var currentPosition = parseInt(items[i].style.top);
-            items[i].style.top = currentPosition + -player.getSpeed + "px";
-        }
-
-    }
-
-}
-
-function ContentRight(d) {
-
-    var items = document.body.getElementsByTagName("*");
-
-    for (var i = 0, len = items.length; i < len; i++) {
-            
-        if (items[i].className !== "player") {
-    
-            var currentPosition = parseInt(items[i].style.left);
-            items[i].style.left = currentPosition + player.getSpeed + "px";
-        
-        }
-
-    }
-
-}
-
-function ContentLeft(d) {
-
-    var items = document.body.getElementsByTagName("*");
-
-    for (var i = 0, len = items.length; i < len; i++) {
-            
-        if (items[i].className !== "player") {
-    
-            var currentPosition = parseInt(items[i].style.left);
-            items[i].style.left = currentPosition + -player.getSpeed + "px";
-        
-        }
-
-    }
+    clients.push(new Client(client.id, client.x, client.y));
 
 }

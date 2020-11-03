@@ -1,7 +1,9 @@
+/* CSS is pretty basic so we'll comment it at the end */
+
 body {
 
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     overflow: hidden;
     position: relative;
 
@@ -11,6 +13,9 @@ body {
 
     position: absolute;
     top: 0px;
+    left: 0px;
+    width: 10000;
+    height: 10000;
 
 }
 
@@ -21,10 +26,16 @@ body {
 
 }
 
-#playerPos {
+#playerId {
 
     position: absolute;
     z-index: 10;
     color: red;
+
+}
+
+.client {
+
+    background-color: red;
 
 }
