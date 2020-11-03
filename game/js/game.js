@@ -88,6 +88,7 @@ function start(playerID) {
 
 function update(delta) {
 
+
     // Player movement code
     // This needs some work
     // Might want to be moved around a bit but it works for now
@@ -150,3 +151,4 @@ function createClient(client) {
     clients.push(new Client(client.id, client.x, client.y));
 
 }
+
