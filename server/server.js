@@ -194,7 +194,9 @@ rl.on("line", (line) => {
             case "restart":
 
                 console.log("Restarting server");
-                console.log("Command still in development - Client arrays still need to be wiped client side");
+                sendAllClients({
+                    type: "restart"
+                });
                 ServerSocket.clients = new Set();
                 break;
 

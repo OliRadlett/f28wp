@@ -79,6 +79,12 @@ function start(playerID) {
                 
                 break;
 
+            // Used only for development
+            // 
+            case "restart":
+                location.reload();
+                break;
+
         }
 
     };
