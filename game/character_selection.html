@@ -2,47 +2,78 @@
 <html>
     <head>
         <title>Character Selection</title>
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
     </head>
-    <div id="gamearea" class="fixheight">
-        <h1 id="gamestatus">Character Classes</h1>
-        <div id="display" class="hft-fullcenter fixheight">
-          <div id="input" class="hft-instruction hft-fullcenter">Touch to Select</div>
-        </div>
-        <div id="inputarea"  class="hft-fullcenter fixheight"></div>
-      </div>
-      <div id="choose" class="hft-fullcenter fixheight">
-        <div>Select a character</div>
-          <div id="choices">
-            <div id="choice0" class="choice"><img src="Sprites\Archer_1 x10.png"></div>
-            <div id="choice1" class="choice"><img src="Sprites\Knight_1 x10.png"></div>
-            <div id="choice2" class="choice"><img src="Sprites/Wizard_1 x10.png"></div>
-          </div>
-      </div>
-
     <body>
-      <style>
-        #choice0 {
-          position: relative; 
-        } 
-
-        #choice2 {
-          position: relative;
-        }
-
-        #choice0{
-          position: absolute;
-          left: 700px;
-          
-        }
-
-        #choice2{
-          position: absolute;
-          top: 120px;
-          left: 1400px;
-        }
-
-      </style>
+      <div class="sliding-background"></div>
+      <div class = "container">
+        
+        <div id="gamearea" class="fixheight">
+          <h1 id="gamestatus">Character Classes</h1>
+          <div id="display" class="hft-fullcenter fixheight">
+            <div id="input" class="hft-instruction hft-fullcenter">Select a character</div>
+          </div>
+          <div id="inputarea"  class="hft-fullcenter fixheight"></div>
+        </div>
+        <div id="choose" class="hft-fullcenter fixheight">
+            <div id="choices">
+              <div id="choice0" class="choice"><img src="Sprites\Archer_1 x10.png"></div>
+              <div id="choice1" class="choice"><img src="Sprites\Knight_1 x10.png"></div>
+              <div id="choice2" class="choice"><img src="Sprites/Wizard_1 x10.png"></div>
+            </div>
+        </div>
+      </div>   
+      
 
     </body>
+    
+    <style>
+      #gamearea{
+        font-family: 'Press Start 2P', cursive;
+      }
+      #gamestatus{
+        font-size: larger;
+      }
+      #choice0 {
+        position: relative; 
+      } 
+
+      #choice2 {
+        position: relative;
+      }
+
+      #choice0{
+        position: absolute;
+        left: 700px;
+        
+      }
+
+      #choice2{
+        position: absolute;
+        top: 120px;
+        left: 1400px;
+      }
+
+      .container{
+        overflow: hidden;
+      }
+      .sliding-background{
+
+        background: url(Sprites/Cloud\ Background\ v1.png) repeat-x;
+        height: 500px;
+        width: 5076px;
+        animation: slide 60s linear infinite;
+      }
+
+      @keyframes slide{
+        0%{
+          transform: translate3d(0,0,0);
+        }
+        100%{
+          transform: translate3d(-1692px,0,0);
+        }
+      }
+
+    </style>
 </html>
