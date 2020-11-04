@@ -1,24 +1,10 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>f28wp game</title>
-        <a id="position_button" href="character_selection.html" class="button">Start Game</a>
-        <a id="position_button1" href="index.html" class="button">Continue</a>
-        <a href="options.html">Options</a>
-        <link type="text/css" rel="stylesheet" href="css/stylesheet_change.css" />
-        <script type="text/javascript" src="js/startbutton.js"></script>
-    </head>
-    <body>
 
-        <div class="container-forbackground">
-
-            <div class ="sliding-background-menu"></div>
-            
-            </div>
-            
-            </head>
-        <!--Start page-->
-        
+<head>
+    <title>f28wp game</title>
+    <link type="text/css" rel="stylesheet" href="css/stylesheet_change.css" />
+    <script type="text/javascript" src="js/startbutton.js"></script>
     <style>
         body {
             font-size: 40px;
@@ -26,54 +12,77 @@
             color: black;
             top: 1px;
             width: 100%;
-            margin-top: 0px;
-            margin-bottom: 0px;
-        }
-        
-        /*
-        The Start Game button position
-        */
-        #position_button {
-            position: absolute;
-            top: 410px;
-            width: 1650px;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        /*
-        The Continue button position
-        */
-        #position_button1 {
-            position: absolute;
-            top: 490px;
-            width: 1650px;
-            text-align: center;
-            text-decoration: none;
+            margin: 0px;
         }
 
         .container-forbackground {
-           overflow: hidden;
-}
+            overflow: hidden;
+        }
 
         .sliding-background-menu {
-           background: url(Sprites/Cloud\ Background\ v1.png) repeat-x;
-           height: 500px;
-           width: 5076px;  
-           animation: slide 60s linear infinite; 
-}
+            background: url(Sprites/Cloud\ Background\ v1.png) repeat-x;
+            height: 500px;
+            width: 5076px;
+            animation: slide 60s linear infinite;
+        }
+
         @keyframes slide {
-            0%{
+            0% {
                 transform: translate3d(0, 0, 0);
             }
-            100%{
-                transform: translate3d(-1692px, 0, 0); /* thw width */
+
+            100% {
+                transform: translate3d(-1692px, 0, 0);
+                /* thw width */
             }
         }
 
+        a {
 
+            text-decoration: none;
+            color: black;
+
+        }
+
+        .menu {
+
+            border: 1px solid black;
+            text-align: center;
+            max-width: 50%;
+            margin: auto;
+            padding-top: 1%;
+            padding-bottom: 1%;
+
+        }
+
+        .b {
+
+            border: 1px solid black;
+            width: 40%;
+            text-align: center;
+            margin: auto;
+
+        }
 
     </style>
+</head>
+<body>
+    <div class="container-forbackground">
+        <div class="sliding-background-menu"></div>
+    </div>
+    <div class="menu">
+        <div class="b">
+            <a href="character_selection.html" class="button">Start Game</a>
+        </div>
+        <br />
+        <div class="b">
+            <a href="index.html" class="button">Continue</a>
+        </div>
+        <br />
+        <div class="b">
+            <a href="options.html" class="button">Options</a>
+        </div>
+    </div>
+</body>
 
-    </body>
 </html>
