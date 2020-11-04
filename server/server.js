@@ -228,4 +228,4 @@ rl.on("line", (line) => {
 });
 
 console.log("Server starting on port 8080");
-console.log("Type 'help' to see available commands")
+console.log("Type 'help' to see available commands");
