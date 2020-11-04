@@ -99,8 +99,6 @@ ServerSocket.on("connection", ws => {
 
                 }
 
-                console.log("Synchronising clients");
-                console.log(currentClients);
                 ws.send(JSON.stringify(currentClients));
                 break;
 

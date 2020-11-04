@@ -1,5 +1,6 @@
 let player;
 let clients = [];
+let enemies = [];
 
 // PUT ALL OF THIS IN A CLASS ITS MESSY AS SHITE
 
@@ -141,10 +142,19 @@ function update(delta) {
 
     }
 
+    // Update client positions
     for (i = 0; i < clients.length; i++) {
 
         clients[i].element.style.top = clients[i].getY + "px";
         clients[i].element.style.left = clients[i].getX + "px";
+
+    }
+
+    // Update AI behaviour
+    for (i = 0; i < enemies.length; i++) {
+
+        enemies[i].updatePos();
+        enemies[i].update();
 
     }
 
