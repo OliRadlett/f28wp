@@ -135,7 +135,7 @@ class Melee extends Enemy {
 
         // idk this is just a test
         this.vision = 400;
-        this.speed = 0.9;
+        this.speed = 0.7;
 
         this.element.classList.add("melee");
 

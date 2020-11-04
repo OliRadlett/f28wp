@@ -39,13 +39,25 @@ function isCommand(command) {
 
 }
 
+
+// Temp just to spawn in some enemies
 enemies.push(
     {
         // Idk if i like the length being calculated like this
         id: enemies.length - 1,
         type: "melee",
-        x: 100,
-        y: 100
+        x: 400,
+        y: 400
+    }
+);
+
+enemies.push(
+    {
+        // Idk if i like the length being calculated like this
+        id: enemies.length - 1,
+        type: "melee",
+        x: 600,
+        y: 700
     }
 );
 

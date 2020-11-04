@@ -1,6 +1,8 @@
 let player;
 let clients = [];
+// Not a fan of this
 let enemies = [];
+let enemies_class = [];
 
 // PUT ALL OF THIS IN A CLASS ITS MESSY AS SHITE
 
@@ -82,8 +84,22 @@ function start(playerID) {
                 break;
 
             case "syncEnemies":
-                enemies = message.enemies;
-                // TODO instantiate enemies classes based on the contents of enemies array
+                for (i = 0; i < message.enemies.length; i++) {
+
+                    if (message.enemies[i] in enemies) {
+
+                        // TODO use setters
+                        enemies[message.enemies[i].id].x = message.enemies[i].x;
+
+                    } else {
+
+                        enemies.push(message.enemies[i]);
+                        // TODO make this do different types of enemy
+                        enemies_class.push(new Melee(message.enemies[i].x, message.enemies[i].y));
+
+                    }
+
+                }
                 break;
 
             // Used only for development
@@ -155,10 +171,10 @@ function update(delta) {
     }
 
     // Update AI behaviour
-    for (i = 0; i < enemies.length; i++) {
+    for (i = 0; i < enemies_class.length; i++) {
 
-        enemies[i].updatePos();
-        enemies[i].update();
+        enemies_class[i].updatePos();
+        enemies_class[i].update();
 
     }
 
