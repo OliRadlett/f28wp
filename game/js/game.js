@@ -42,6 +42,7 @@ function start(playerID) {
                     x: message.x,
                     y: message.y
                 });
+                break;
 
             case "playerCoords":
 
