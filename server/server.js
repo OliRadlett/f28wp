@@ -44,7 +44,7 @@ function isCommand(command) {
 enemies.push(
     {
         // Idk if i like the length being calculated like this
-        id: enemies.length - 1,
+        id: enemies.length,
         type: "melee",
         x: 400,
         y: 400
@@ -54,7 +54,7 @@ enemies.push(
 enemies.push(
     {
         // Idk if i like the length being calculated like this
-        id: enemies.length - 1,
+        id: enemies.length,
         type: "melee",
         x: 600,
         y: 700
@@ -152,6 +152,25 @@ ServerSocket.on("connection", ws => {
                         // Update the position of the client stored on the server
                         client.position.x = message.x;
                         client.position.y = message.y;
+
+                    }
+
+                }
+                break;
+
+            case "enemyCoordinates":
+                enemies[message.id].x = message.x;
+                enemies[message.id].y = message.y;
+                
+                for (let client of ServerSocket.clients) {
+
+                    if (client.id != message.clientId) {
+
+                        // We'll want to optimise this by only sending across the coordinates of the enemies that have changed
+                        client.send(JSON.stringify({
+                            type: "syncEnemies",
+                            enemies: enemies
+                        }));
 
                     }
 

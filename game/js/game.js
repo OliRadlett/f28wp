@@ -86,16 +86,21 @@ function start(playerID) {
             case "syncEnemies":
                 for (i = 0; i < message.enemies.length; i++) {
 
-                    if (message.enemies[i] in enemies) {
+                    // console.log(message.enemies[i]);
+
+                    if (enemies.find((e) => {return e.id == message.enemies[i].id;})) {
 
                         // TODO use setters
                         enemies[message.enemies[i].id].x = message.enemies[i].x;
+                        enemies[message.enemies[i].id].y = message.enemies[i].y;
+                        enemies_class[i].x = message.enemies[i].x;
+                        enemies_class[i].y = message.enemies[i].y;
 
                     } else {
 
                         enemies.push(message.enemies[i]);
                         // TODO make this do different types of enemy
-                        enemies_class.push(new Melee(message.enemies[i].x, message.enemies[i].y));
+                        enemies_class.push(new Melee(message.enemies[i].x, message.enemies[i].y, message.enemies[i].id));
 
                     }
 

@@ -1,13 +1,31 @@
 class Enemy {
 
-    constructor(x, y) {
+    constructor(x, y, id) {
 
         this.x = x;
         this.y = y;
         this.element = document.getElementById("body").appendChild(this.createElement());
         // Temp
-        this.id = null;
+        this.id = id;
         this.direction = null;
+        this.moving = false;
+
+        // Update position on server
+        setInterval(() => {
+
+            if (this.moving) {
+
+                webSocket.send(JSON.stringify({
+                    type: "enemyCoordinates",
+                    clientId: player.getID,
+                    id: this.id,
+                    x: this.x,
+                    y: this.y
+                }));
+
+            }
+
+        }, 1); // Use 1ms for LAN but we need to make this bigger when the server is on the internet or it'll just lag
 
     }
 
@@ -56,6 +74,9 @@ class Enemy {
 
     moveTowardsPlayer() {
 
+        // This doesn't work if multiple clients are within vision range
+        // A fix could be to work out if this is happening and pick a random player to follow
+
         if (Math.floor(this.x) > player.x) {
 
             this.x = this.x - this.speed;
@@ -76,6 +97,7 @@ class Enemy {
 
         }
         
+        this.moving = true;
 
     }
 
@@ -102,9 +124,9 @@ class Enemy {
 
 class Ranged extends Enemy {
 
-    constructor(x, y) {
+    constructor(x, y, id) {
 
-        super(x, y);
+        super(x, y, id);
 
         // idk this is just a test
         this.vision = 500;
@@ -121,6 +143,10 @@ class Ranged extends Enemy {
 
             this.moveTowardsPlayer();
 
+        } else {
+
+            this.moving = false;
+
         }
 
     }
@@ -129,9 +155,9 @@ class Ranged extends Enemy {
 
 class Melee extends Enemy {
 
-    constructor(x, y) {
+    constructor(x, y, id) {
 
-        super(x, y);
+        super(x, y, id);
 
         // idk this is just a test
         this.vision = 400;
@@ -146,6 +172,10 @@ class Melee extends Enemy {
         if (this.distanceFromPlayer < this.vision) {
 
             this.moveTowardsPlayer();
+
+        } else {
+
+            this.moving = false;
 
         }
 
