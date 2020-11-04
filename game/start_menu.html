@@ -9,7 +9,14 @@
         <script type="text/javascript" src="js/startbutton.js"></script>
     </head>
     <body>
-        
+
+        <div class="container-forbackground">
+
+            <div class ="sliding-background-menu"></div>
+            
+            </div>
+            
+            </head>
         <!--Start page-->
         
     <style>
@@ -17,6 +24,10 @@
             font-size: 40px;
             background-color: white;
             color: black;
+            top: 1px;
+            width: 100%;
+            margin-top: 0px;
+            margin-bottom: 0px;
         }
         
         /*
@@ -40,6 +51,27 @@
             text-align: center;
             text-decoration: none;
         }
+
+        .container-forbackground {
+           overflow: hidden;
+}
+
+        .sliding-background-menu {
+           background: url(Sprites/Cloud\ Background\ v1.png) repeat-x;
+           height: 500px;
+           width: 5076px;  
+           animation: slide 60s linear infinite; 
+}
+        @keyframes slide {
+            0%{
+                transform: translate3d(0, 0, 0);
+            }
+            100%{
+                transform: translate3d(-1692px, 0, 0); /* thw width */
+            }
+        }
+
+
 
     </style>
 
