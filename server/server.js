@@ -2,6 +2,9 @@ const { Server } = require("ws");
 const WebSocket = require("ws");
 const readline = require("readline");
 
+
+let enemies = [];
+
 // VERY VERY basic - all of this will need redoing soon
 // Also split this shit up into different classes etc.
 
@@ -35,6 +38,28 @@ function isCommand(command) {
     return false;
 
 }
+
+
+// Temp just to spawn in some enemies
+enemies.push(
+    {
+        // Idk if i like the length being calculated like this
+        id: enemies.length - 1,
+        type: "melee",
+        x: 400,
+        y: 400
+    }
+);
+
+enemies.push(
+    {
+        // Idk if i like the length being calculated like this
+        id: enemies.length - 1,
+        type: "melee",
+        x: 600,
+        y: 700
+    }
+);
 
 // Client tracking allows the server socket to create a set to keep track of all client connections
 const ServerSocket = new WebSocket.Server({port: 8080, clientTracking: true});
@@ -82,7 +107,7 @@ ServerSocket.on("connection", ws => {
                 // Send all the clients to the newly connected client
                 let currentClients = {
                     type: "synchroniseClients",
-                    clients: []
+                    clients: [],
                 };
 
                 for (let client of ServerSocket.clients) {
@@ -100,6 +125,11 @@ ServerSocket.on("connection", ws => {
                 }
 
                 ws.send(JSON.stringify(currentClients));
+                // Send over enemies array
+                ws.send(JSON.stringify({
+                    type: "syncEnemies",
+                    enemies: enemies
+                }));
                 break;
 
             case "playerCoords":
@@ -210,4 +240,4 @@ rl.on("line", (line) => {
 });
 
 console.log("Server starting on port 8080");
-console.log("Type 'help' to see available commands")
+console.log("Type 'help' to see available commands");
