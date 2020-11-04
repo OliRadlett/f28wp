@@ -81,6 +81,11 @@ function start(playerID) {
                 
                 break;
 
+            case "syncEnemies":
+                enemies = message.enemies;
+                // TODO instantiate enemies classes based on the contents of enemies array
+                break;
+
             // Used only for development
             case "restart":
                 location.reload();
@@ -89,7 +94,6 @@ function start(playerID) {
         }
 
     };
-
 
 }
 
