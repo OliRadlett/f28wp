@@ -5,6 +5,11 @@ let DOWN = false;
 let LEFT = false;
 let RIGHT = false;
 
+// TEMP!!!
+// Normally we'd use the map size but the map isn't finished yet
+let GAMEWIDTH = 10000;
+let GAMEHEIGHT = 10000;
+
 let backgroundElement;
 let playerElement;
 

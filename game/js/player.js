@@ -16,29 +16,55 @@ class Player {
 
     up() {
 
-        this.y -= this.speed;
-        this.element.style.top = this.y + "px";
+        let dy = this.y - this.speed;
+
+        // Fix the calculations to that > 0 instead of > -10 before handing in
+        if (dy > -10) {
+
+            this.y = dy;
+            this.element.style.top = this.y + "px";
+
+        }
     
     }
     
     down() {
     
-        this.y += this.speed;
-        this.element.style.top = this.y + "px";
+        let dy = this.y + this.speed;
+
+        if (dy < 10000) {
+
+            this.y = dy;
+            this.element.style.top = this.y + "px";
+
+        }
     
     }
     
     left() {
     
-        this.x -= this.speed;
-        this.element.style.left = this.x + "px";
+        let dx = this.x - this.speed;
+
+        // Fix the calculations to that > 0 instead of > -10 before handing in
+        if (dx > -10) {
+
+            this.x = dx;
+            this.element.style.left = this.x + "px";
+
+        }
     
     }
     
     right() {
     
-        this.x += this.speed;
-        this.element.style.left = this.element.style.left = this.x + "px";
+        let dx = this.x + this.speed;
+
+        if (dx < 10000) {
+
+            this.x = dx;
+            this.element.style.left = this.x + "px";
+
+        }
     
     }
     
