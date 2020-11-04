@@ -41,7 +41,7 @@ function loadFromDOM() {
 function loadAssets() {
 
     backgroundElement.style.backgroundImage = "url('res/test.png')";
-    playerElement.style.backgroundImage = "url('res/player.png')";
+    // playerElement.style.backgroundImage = "url('res/player.png')";
 
 }
 
