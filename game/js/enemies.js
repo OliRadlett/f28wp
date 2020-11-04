@@ -25,7 +25,7 @@ class Enemy {
 
             }
 
-        }, 1); // Use 1ms for LAN but we need to make this bigger when the server is on the internet or it'll just lag
+        }, interval);
 
     }
 

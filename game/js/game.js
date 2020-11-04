@@ -4,6 +4,10 @@ let clients = [];
 let enemies = [];
 let enemies_class = [];
 
+
+let interval = 1; // We use 1ms for LAN but we need this to be higher when the server is on the internet or it'll just lag
+
+
 // PUT ALL OF THIS IN A CLASS ITS MESSY AS SHITE
 
 function start(playerID) {
@@ -25,8 +29,7 @@ function start(playerID) {
 
         }));
 
-        // We use 1ms for LAN but we need this to be higher when the server is on the internet or it'll just lag
-    }, 1);
+    }, interval);
 
     webSocket.onmessage = (message) => {
 
