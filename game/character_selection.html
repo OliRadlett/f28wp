@@ -2,116 +2,37 @@
 <html>
 
 <head>
-  <title>Character Selection</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Press Start 2P', cursive;
-      margin: 0;
-      background-color: #c9f6ff;
-
-    }
-
-    @keyframes slide {
-      0% {
-        transform: translate3d(0, 0, 0);
-      }
-
-      100% {
-        transform: translate3d(-1692px, 0, 0);
-      }
-    }
-
-    .sliding-background {
-
-
-      background-image: url(Sprites/Cloud\ Background\ v1\ x5.png);
-      background-repeat: repeat-x;
-
-
-      height: 100vh;
-      width: 5076px;
-      animation: slide 60s linear infinite;
-    }
-
-
-    .container {
-      overflow: hidden;
-
-    }
-
-    #gamearea {
-      position: fixed;
-      top: 0%;
-
-    }
-
-    table {
-      background: rgba(220, 220, 220, 0.6);
-
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      margin-top: -181px;
-      margin-left: -499px;
-
-    }
-
-    th,
-    td {
-      padding: 5px;
-      text-align: center;
-    }
-
-
-    td:hover {
-      background-color: rgba(218, 191, 42, 0.6);
-    }
-
-
-    #Archer_Walk {display: none;}
-    td:hover #Archer {display: none;}
-    td:hover #Archer_Walk{display: block;}
-
-    #Knight_Walk{display: none;}
-    td:hover #Knight{display: none;}
-    td:hover #Knight_Walk{display: block;}
-
-    #Wizard_Walk{display: none;}
-    td:hover #Wizard{display: none;}
-    td:hover #Wizard_Walk{display: block;}
-
-
-  </style>
+    <title>Character Selection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/character_selection.css" />
 </head>
 
 <body>
 
-  <div class="container">
-    <div class="sliding-background"></div>
-    <div id="gamearea" class="fixheight">
-      <h1 id="gamestatus">Character Selection</h1>
-      <div id="display" class="hft-fullcenter fixheight">
-        <div id="input" class="hft-instruction hft-fullcenter">Select a class</div>
-      </div>
-      <div id="inputarea" class="hft-fullcenter fixheight"></div>
+    <div class="container">
+        <div class="sliding-background"></div>
+        <div id="gamearea" class="fixheight">
+            <h1 id="gamestatus">Character Selection</h1>
+            <div id="display" class="hft-fullcenter fixheight">
+                <div id="input" class="hft-instruction hft-fullcenter">Select a class</div>
+            </div>
+            <div id="inputarea" class="hft-fullcenter fixheight"></div>
+        </div>
+
+        <table>
+            <tr>
+                <th>Archer</th>
+                <th>Knight</th>
+                <th>Wizard</th>
+            </tr>
+            <tr>
+                <td><img id="Archer" src="Sprites\Archer_1 x10.png"><img id="Archer_Walk" src="Sprites\Archer_1 Walk v2 x10.gif"></td>
+                <td><img id="Knight" src="Sprites\Knight_1 x10.png"><img id="Knight_Walk" src="Sprites/Knight_1 walk v1 7fps x10.gif"></td>
+                <td><img id="Wizard" src="Sprites/Wizard_1 x10.png"><img id="Wizard_Walk" src="Sprites/Wizard_1  walk v1 x10.gif"></td>
+            </tr>
+        </table>
+
     </div>
-
-    <table>
-      <tr>
-        <th>Archer</th>
-        <th>Knight</th>
-        <th>Wizard</th>
-      </tr>
-      <tr>
-        <td><img id="Archer" src="Sprites\Archer_1 x10.png"><img id="Archer_Walk" src="Sprites\Archer_1 Walk v2 x10.gif"></td>
-        <td><img id="Knight" src="Sprites\Knight_1 x10.png"><img id="Knight_Walk" src="Sprites/Knight_1 walk v1 7fps x10.gif"></td>
-        <td><img id="Wizard" src="Sprites/Wizard_1 x10.png"><img id="Wizard_Walk" src ="Sprites/Wizard_1  walk v1 x10.gif"></td>
-      </tr>
-    </table>
-
-
-  </div>
 </body>
 
 </html>

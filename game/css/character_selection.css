@@ -1,0 +1,99 @@
+body {
+    font-family: 'Press Start 2P', cursive;
+    margin: 0;
+    background-color: #c9f6ff;
+
+}
+
+@keyframes slide {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(-1692px, 0, 0);
+    }
+}
+
+.sliding-background {
+
+
+    background-image: url(../Sprites/Cloud\ Background\ v1\ x5.png);
+    background-repeat: repeat-x;
+
+
+    height: 100vh;
+    width: 5076px;
+    animation: slide 60s linear infinite;
+}
+
+
+.container {
+    overflow: hidden;
+
+}
+
+#gamearea {
+    position: fixed;
+    top: 0%;
+
+}
+
+table {
+    background: rgba(220, 220, 220, 0.6);
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -181px;
+    margin-left: -499px;
+
+}
+
+th,
+td {
+    padding: 5px;
+    text-align: center;
+}
+
+
+td:hover {
+    background-color: rgba(218, 191, 42, 0.6);
+}
+
+
+#Archer_Walk {
+    display: none;
+}
+
+td:hover #Archer {
+    display: none;
+}
+
+td:hover #Archer_Walk {
+    display: block;
+}
+
+#Knight_Walk {
+    display: none;
+}
+
+td:hover #Knight {
+    display: none;
+}
+
+td:hover #Knight_Walk {
+    display: block;
+}
+
+#Wizard_Walk {
+    display: none;
+}
+
+td:hover #Wizard {
+    display: none;
+}
+
+td:hover #Wizard_Walk {
+    display: block;
+}
