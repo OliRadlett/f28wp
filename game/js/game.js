@@ -123,6 +123,23 @@ function update(delta) {
 
     }
 
+    // VERY TEMP
+    if (!UP && !DOWN && !LEFT && !RIGHT) {
+
+        if (player.direction == directions.left) {
+
+            player.element.style.backgroundImage = "url('res/classes/knight/player_still_left.png')";
+
+
+        }
+        
+        if (player.direction == directions.right) {
+
+            player.element.style.backgroundImage = "url('res/classes/knight/player_still_right.png')";
+
+        }
+
+    }
 
     for (i = 0; i < clients.length; i++) {
 
@@ -131,6 +148,8 @@ function update(delta) {
 
     }
 
+    // Player "camera"
+    // Need to make it so that the player is in the centre of the screen
     window.scroll(player.getX - ((window.innerWidth / 2) - 32), player.getY - ((window.innerHeight / 2) - 32));
 
     window.requestAnimationFrame(update);
@@ -150,7 +169,6 @@ function getCoordinates(id) {
 
 }
 
-
 // Not really sure why this function exists
 function createClient(client) {
 
@@ -158,3 +176,9 @@ function createClient(client) {
 
 }
 
+let directions = {
+
+    left: 0,
+    right: 1
+        
+};

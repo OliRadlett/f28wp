@@ -4,10 +4,12 @@ class Player {
 
         this.x = 0;
         this.y = 0;
-        this.speed = 10;
+        this.speed = 1;
         this.id = id;
+        this.direction = directions.right;
         // Create the player element here inside the player class
         this.element = document.getElementById("player");
+        this.element.style.backgroundImage = "url('res/classes/knight/player_walk_right.gif')";
         document.getElementById("playerId").innerHTML = "Client id: " + id;
 
     }
@@ -52,6 +54,10 @@ class Player {
             this.element.style.left = this.x + "px";
 
         }
+        
+        // Temp
+        this.element.style.backgroundImage = "url('res/classes/knight/player_walk_left.gif')";
+        this.direction = directions.left;
     
     }
     
@@ -65,6 +71,11 @@ class Player {
             this.element.style.left = this.x + "px";
 
         }
+
+        // Temp
+        this.element.style.backgroundImage = "url('res/classes/knight/player_walk_right.gif')";
+        this.direction = directions.right;
+
     
     }
     
