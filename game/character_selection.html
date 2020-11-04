@@ -6,6 +6,8 @@
 
     </head>
     <body>
+
+    
       <div class="sliding-background"></div>
       <div class = "container">
         
@@ -16,47 +18,39 @@
           </div>
           <div id="inputarea"  class="hft-fullcenter fixheight"></div>
         </div>
-        <div id="choose" class="hft-fullcenter fixheight">
-            <div id="choices">
-              <div id="choice0" class="choice"><img src="Sprites\Archer_1 x10.png"></div>
-              <div id="choice1" class="choice"><img src="Sprites\Knight_1 x10.png"></div>
-              <div id="choice2" class="choice"><img src="Sprites/Wizard_1 x10.png"></div>
-            </div>
-        </div>
+
+        <table>
+          <tr>
+            <th>Archer</th>
+            <th>Knight</th>
+            <th>Wizard</th>
+          </tr>
+          <tr>
+            <td><img src="Sprites\Archer_1 x10.png"></td>
+            <td><img src="Sprites\Knight_1 x10.png"></td>
+            <td><img src="Sprites/Wizard_1 x10.png"></td>
+          </tr>
+        </table>
+
+
+        
+
+        
       </div>   
       
 
     </body>
     
     <style>
-      #gamearea{
-        font-family: 'Press Start 2P', cursive;
-      }
-      #gamestatus{
-        font-size: larger;
-      }
-      #choice0 {
-        position: relative; 
-      } 
-
-      #choice2 {
-        position: relative;
-      }
-
-      #choice0{
-        position: absolute;
-        left: 700px;
-        
-      }
-
-      #choice2{
-        position: absolute;
-        top: 120px;
-        left: 1400px;
-      }
+     
+      
 
       .container{
         overflow: hidden;
+      }
+      body{
+        font-family: 'Press Start 2P', cursive;
+        background-image: url(Sprites/Cloud\ Background\ v1.png);
       }
       .sliding-background{
 
