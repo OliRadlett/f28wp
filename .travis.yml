@@ -14,3 +14,6 @@ after_success:
 after_script:
 - ssh -i ./deploy_key root@oliradlett.co.uk cd /var/www/html/f28wp && git pull origin
   master
+addons:
+  ssh_known_hosts:
+  - oliradlett.co.uk
