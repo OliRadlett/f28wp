@@ -3,8 +3,7 @@ node_js:
   - node
 
 before_install:
-  - openssl aes-256-cbc -K $encrypted_cc4083d8193d_key -iv $encrypted_cc4083d8193d_iv -in add -out ./.deploy_key -d
-  - in .deploy_key.enc -out ./.deploy_key -d
+  - openssl aes-256-cbc -K $encrypted_cc4083d8193d_key -iv $encrypted_cc4083d8193d_iv -in deploy_key.enc -out ./deploy_key -d
   - npm i -g npm@latest
 
 after_success:
