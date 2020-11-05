@@ -11,9 +11,7 @@ after_success:
 - ssh-add ./deploy_key
 - git remote add deploy https://github.com/OliRadlett/f28wp
 - git push deploy
-after_script:
-- ssh -i ./deploy_key root@oliradlett.co.uk cd /var/www/html/f28wp && git pull origin
-  master
+- ssh -i ./deploy_key root@oliradlett.co.uk cd /var/www/html/f28wp && git pull origin master
 addons:
   ssh_known_hosts:
   - oliradlett.co.uk
