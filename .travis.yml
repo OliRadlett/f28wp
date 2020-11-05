@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - node
+
+before_install:
+  - npm i -g npm@version-number
+
+after_success:
+  - eval "$(ssh-agent -s)" #start the ssh agent
+  - chmod 600 .travis/deploy_key.pem # this key should have push access
+  - ssh-add .travis/deploy_key.pem
+  - git remote add deploy https://github.com/OliRadlett/f28wp
+  - git push deploy
