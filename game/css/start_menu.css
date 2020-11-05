@@ -1,9 +1,9 @@
 body {
 
     font-size: 40px;
-    background-color: white;
+    background-color: #c9f6ff;
     color: black;
-    top: 1px;
+    
     width: 100%;
     margin: 0px;
     font-family: 'Press Start 2P', cursive;
@@ -24,7 +24,7 @@ body {
 
 .sliding-background {
 
-    background-image: url(../Sprites/Cloud\ Background\ v1\ x5.png);
+    background-image: url(../Sprites/Cloud\ Background\ v2\ x5.png);
     background-repeat: repeat-x;
     height: 100vh;
     width: 5076px;
@@ -48,6 +48,7 @@ body {
 
 a {
 
+  margin: 0px;
     text-decoration: none;
     color: black;
 
@@ -79,11 +80,9 @@ a {
 }
 
 .b {
-
     border: 5px solid black;
-    width: 50%;
-    text-align: center;
     margin: auto;
     width: 400px;
 
+    
 }
