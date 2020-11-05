@@ -17,6 +17,15 @@ Game idea:
 5. When it comes to music we either make something up using an app or we use free music online (depends on time and abilities)
 6. Maybe each player will have a skills sheet which can improve when level up and get abilities 
 
+Things we've done/working to improve:
+1. Start menu with sliding background 
+2. working on improving enemy AI
+3. Made the character selection page more interactive
+4. The option menu now has sliders for the music volume
+4. Added more images to use in the game such as heart, world map, skeleton...etc
+
+
+
 Game play ideas:
  Either shooter or swords  
 
