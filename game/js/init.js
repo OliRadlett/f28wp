@@ -7,8 +7,8 @@ let RIGHT = false;
 
 // TEMP!!!
 // Normally we'd use the map size but the map isn't finished yet
-let GAMEWIDTH = 10000;
-let GAMEHEIGHT = 10000;
+let GAMEWIDTH = 15000;
+let GAMEHEIGHT = 15000;
 
 let backgroundElement;
 let playerElement;
@@ -35,12 +35,12 @@ function loadFromDOM() {
 
     backgroundElement = document.getElementById("background");
     playerElement = document.getElementById("player");
-    
+
 }
 
 function loadAssets() {
 
-    backgroundElement.style.backgroundImage = "url('res/test.png')";
+    backgroundElement.style.backgroundImage = "url('../concept art/Map v3.png')";
     // playerElement.style.backgroundImage = "url('res/player.png')";
 
 }
@@ -51,15 +51,17 @@ function setupObjects() {
     // idk why this isnt in the respective classes but it really needs to be
 
     // Background
-    backgroundElement.style.width = window.innerWidth + "px";
-    backgroundElement.style.height = window.innerHeight + "px";
+    // backgroundElement.style.width = window.innerWidth + "px";
+    // backgroundElement.style.height = window.innerHeight + "px";
+    backgroundElement.style.width = GAMEWIDTH + "px";
+    backgroundElement.style.height = GAMEHEIGHT + "px";
     // Player
     // THIS REALLY NEEDS TO BE IN THE PLAYER CLASS THIS IS PRETTY BAD
-    
+
     // Also these positions should be set by the server not hard coded
     playerElement.style.top = "0px";
     playerElement.style.left = "0px";
-    
+
     playerElement.style.width = 64 + "px";
     playerElement.style.height = 64 + "px";
     playerElement.style.backgroundRepeat = "no-repeat";
@@ -68,6 +70,7 @@ function setupObjects() {
     backgroundElement.style.left = 0 + "px";
     backgroundElement.style.overflow = "hidden";
     backgroundElement.style.backgroundRepeat = "no-repeat";
+    backgroundElement.style.backgroundSize = "cover";
 
 }
 
@@ -75,7 +78,7 @@ function setupControls() {
 
     document.addEventListener("keydown", (event) => {
 
-        switch(event.key) {
+        switch (event.key) {
 
             case "w":
                 UP = true;
@@ -102,7 +105,7 @@ function setupControls() {
 
     document.addEventListener("keyup", (event) => {
 
-        switch(event.key) {
+        switch (event.key) {
 
             case "w":
                 UP = false;
@@ -139,7 +142,7 @@ function initMultiplayer() {
     let playerID = Date.now();
 
     webSocket.onopen = () => {
-        
+
         // VERY TEMPORARY
         let message = {
 
