@@ -61,7 +61,7 @@ class Player {
 
         // Temp
         this.element.style.backgroundImage = "url('res/classes/knight/player_walk_left.gif')";
-        this.direction = directions.left;
+        this.direction = this.directions.left;
 
     }
 
@@ -78,7 +78,7 @@ class Player {
 
         // Temp
         this.element.style.backgroundImage = "url('res/classes/knight/player_walk_right.gif')";
-        this.direction = directions.right;
+        this.direction = this.directions.right;
 
 
     }
