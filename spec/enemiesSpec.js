@@ -49,4 +49,65 @@ describe("enemy suite", () => {
 
     });
 
+    it("create element", () => {
+
+        let enemy = new Enemy(0, 0, 0);
+
+        // TODO in the future change this to compare to an element object instead of a string
+        expect(enemy.element.outerHTML).toBe('<div class="enemy" style="background-image: url(' + "'" + 'res/classes/knight/player_walk_right.gif' + "'" + '); top: 0px; left: 0px; width: 64px; height: 64px; position: absolute; z-index: 10; background-repeat: no-repeat; "></div>');
+
+    });
+
+    it("moves towards player when in range", () => {
+
+        let enemy = new Ranged(0, 0, 0);
+
+        // Mock up a blank websocket to avoid errors
+        global.webSocket = {};
+        global.webSocket.send = () => {
+            return true;
+        };
+
+        // Move the player within vision
+        player.setCoords({
+            x: 50,
+            y: 50
+        });
+
+        // Spy on the function to check if it gets called
+        spyOn(enemy, "moveTowardsPlayer");
+
+        // Manually run the update function once to trigger moveTowardsPlayer()
+        enemy.update();
+
+        expect(enemy.moveTowardsPlayer).toHaveBeenCalled();
+
+    });
+
+    it("don't move towards player when not in range", () => {
+
+        let enemy = new Ranged(0, 0, 0);
+
+        // Mock up a blank websocket to avoid errors
+        global.webSocket = {};
+        global.webSocket.send = () => {
+            return true;
+        };
+
+        // Move the player within vision
+        player.setCoords({
+            x: 500,
+            y: 500
+        });
+
+        // Spy on the function to check if it gets called
+        spyOn(enemy, "moveTowardsPlayer");
+
+        // Manually run the update function once to trigger moveTowardsPlayer()
+        enemy.update();
+
+        expect(enemy.moveTowardsPlayer).not.toHaveBeenCalled();
+
+    });
+
 });
