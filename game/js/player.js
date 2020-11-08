@@ -140,4 +140,13 @@ class Player {
 
 }
 
+if (typeof module == "undefined") {
+
+    window.module = {};
+    module.exports = () => {
+        return true;
+    };
+
+}
+
 module.exports = Player;
