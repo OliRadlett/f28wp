@@ -4,7 +4,7 @@ class Enemy {
 
         this.x = x;
         this.y = y;
-        this.element = document.getElementById("body").appendChild(this.createElement());
+        this.element = document.body.appendChild(this.createElement());
         // Temp
         this.id = id;
         this.direction = null;
@@ -30,19 +30,19 @@ class Enemy {
     }
 
     get getX() {
-    
+
         return this.x;
-    
+
     }
-    
+
     get getY() {
-    
+
         return this.y;
-    
+
     }
 
     get distanceFromPlayer() {
-        
+
         // Use Pythagoras to calculate the distance from the player to the enemy
         let a = this.x - player.getX;
         let b = this.y - player.getY;
@@ -52,12 +52,31 @@ class Enemy {
 
     }
 
+    set setX(x) {
+
+        this.x = x;
+
+    }
+
+    set setY(y) {
+
+        this.y = y;
+
+    }
+
+    set setCoords(coords) {
+
+        this.x = coords.x;
+        this.y = coords.y;
+
+    }
+
     createElement() {
 
         let element = document.createElement("div");
 
         // We'll want to preload the assets somehow instead of loading things every we spawn an enemy
-        
+
         element.style.backgroundImage = "url('res/classes/knight/player_walk_right.gif')";
         element.className = "enemy";
         element.style.top = this.y + "px";
@@ -96,7 +115,7 @@ class Enemy {
             this.y = this.y + this.speed;
 
         }
-        
+
         this.moving = true;
 
     }
@@ -168,7 +187,7 @@ class Melee extends Enemy {
     }
 
     update() {
-        
+
         if (this.distanceFromPlayer < this.vision) {
 
             this.moveTowardsPlayer();
@@ -182,3 +201,11 @@ class Melee extends Enemy {
     }
 
 }
+
+module.exports = {
+
+    Enemy,
+    Ranged,
+    Melee
+
+};
