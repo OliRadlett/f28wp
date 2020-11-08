@@ -5,9 +5,12 @@
         "test": "test"
     },
     "dependencies": {
-        "jasmine": "^3.6.3"
+        "jasmine": "^3.6.3",
+        "nodom": "^2.4.0"
     },
-    "devDependencies": {},
+    "devDependencies": {
+        "redom": "^3.27.1"
+    },
     "scripts": {
         "test": "jasmine"
     },
