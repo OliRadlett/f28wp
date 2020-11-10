@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/" # Tests
+    schedule:
+      interval: "daily"
+   - package-ecosystem: "npm" 
+    directory: "/server" # Server
+    schedule:
+      interval: "daily"
