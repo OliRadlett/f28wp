@@ -7,8 +7,8 @@ let RIGHT = false;
 
 // TEMP!!!
 // Normally we'd use the map size but the map isn't finished yet
-let GAMEWIDTH = 15000;
-let GAMEHEIGHT = 15000;
+let GAMEWIDTH = 15360;
+let GAMEHEIGHT = 15360;
 
 let backgroundElement;
 let playerElement;
@@ -40,7 +40,7 @@ function loadFromDOM() {
 
 function loadAssets() {
 
-    backgroundElement.style.backgroundImage = "url('../concept art/Map v3.png')";
+    backgroundElement.style.backgroundImage = "url('res/map/map.png')";
     // playerElement.style.backgroundImage = "url('res/player.png')";
 
 }
