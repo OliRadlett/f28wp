@@ -2,6 +2,12 @@ class Map {
 
     constructor() {
 
+        this.parseMap();
+
+    }
+
+    parseMap() {
+
         fetch("res/map.json").then(response => response.json()).then(data => {
 
             let width = data.width;
