@@ -15,8 +15,6 @@ class Map {
 
             for (let layer in data.layers) {
 
-                // console.log(layer)
-
                 // Skip layer 0 (image layer)
                 if (layer != 0) {
 
@@ -25,12 +23,10 @@ class Map {
 
                     for (let i in data.layers[layer].data) {
 
-                        // console.log(data.layers[layer].data[i])
                         x++;
 
                         if (data.layers[layer].data[i] == 5) {
 
-                            // console.log("Wall found at x: " + x * 64 + ", y: " + y * 64);
                             document.body.appendChild(this.drawDebugWall(x * 64, y * 64));
 
                         }
@@ -66,6 +62,18 @@ class Map {
         element.style.zIndex = 10;
 
         return element;
+
+    }
+
+    get width() {
+
+        return this.width;
+
+    }
+
+    get height() {
+
+        return this.height;
 
     }
 
