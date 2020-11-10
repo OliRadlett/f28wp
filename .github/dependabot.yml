@@ -1,10 +1,13 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
-    directory: "/" # Tests
+    # Tests
+    directory: "/"
     schedule:
       interval: "daily"
-   - package-ecosystem: "npm" 
-    directory: "/server" # Server
+    
+  - package-ecosystem: "npm"
+    # Server
+    directory: "/server"
     schedule:
       interval: "daily"
