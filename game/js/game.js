@@ -92,8 +92,8 @@ function start(playerID) {
                     // console.log(message.enemies[i]);
 
                     if (enemies.find((e) => {
-                            return e.id == message.enemies[i].id;
-                        })) {
+                        return e.id == message.enemies[i].id;
+                    })) {
 
                         // TODO use setters
                         enemies[message.enemies[i].id].x = message.enemies[i].x;
@@ -112,7 +112,7 @@ function start(playerID) {
                 }
                 break;
 
-                // Used only for development
+            // Used only for development
             case "restart":
                 location.reload();
                 break;
@@ -158,16 +158,22 @@ function update(delta) {
     if (!UP && !DOWN && !LEFT && !RIGHT) {
 
         if (player.direction == player.directions.left) {
-
-            player.element.style.backgroundImage = "url('res/classes/knight/player_still_left.png')";
-
-
+            //Old code
+            //player.element.style.backgroundImage = "url('res/classes/knight/player_still_left.png')";
+            
+            //Changes the sprite of the player depending on their class. Probably a better way of doing this
+            player.element.style.backgroundImage = "url('res/classes/"+player.playerClass+"/player_still_left.png')";
+        
         }
 
         if (player.direction == player.directions.right) {
 
-            player.element.style.backgroundImage = "url('res/classes/knight/player_still_right.png')";
+            //Old code
+            //player.element.style.backgroundImage = "url('res/classes/knight/player_still_right.png')";
 
+            //Changes the sprite of the player depending on their class. Probably a better way of doing this
+            player.element.style.backgroundImage = "url('res/classes/"+player.playerClass+"/player_still_right.png')";
+       
         }
 
     }

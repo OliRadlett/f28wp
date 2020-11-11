@@ -1,6 +1,6 @@
 class Player {
 
-    constructor(id) {
+    constructor(id, playerClass) {
 
         this.x = 0;
         this.y = 0;
@@ -11,14 +11,27 @@ class Player {
             right: 1
         };
         this.direction = this.directions.right;
+
+        
+        //playerClass is the way to choose what class the player is. Right now it needs to be changed in the code
+        this.playerClass = "wizard";
+        //TODO make it so clicking on the character select will pick the right class
+        //this.playerClass = playerClass
+
         // TODO Create the player element here inside the player class
         this.element = document.getElementById("player");
-        this.element.style.backgroundImage = "url('res/classes/knight/player_walk_right.gif')";
+
+        this.element.style.backgroundImage = "url('res/classes/" + this.playerClass + "/player_walk_right.gif')";
+
+
+
+
         document.getElementById("playerId").innerHTML = "Client id: " + id;
 
     }
 
     // All this shit is basically copied from game.js so it could do with a rewrite at some point to make it more efficient
+
 
     up() {
 
@@ -60,7 +73,7 @@ class Player {
         }
 
         // Temp
-        this.element.style.backgroundImage = "url('res/classes/knight/player_walk_left.gif')";
+        this.element.style.backgroundImage = "url('res/classes/" + this.playerClass + "/player_walk_left.gif')";
         this.direction = this.directions.left;
 
     }
@@ -77,11 +90,13 @@ class Player {
         }
 
         // Temp
-        this.element.style.backgroundImage = "url('res/classes/knight/player_walk_right.gif')";
+        this.element.style.backgroundImage = "url('res/classes/" + this.playerClass + "/player_walk_right.gif')";
         this.direction = this.directions.right;
 
 
     }
+
+
 
     // TODO Rename getters and setters in the form below
     /*
