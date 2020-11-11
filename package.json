@@ -1,0 +1,27 @@
+{
+    "name": "f28wp",
+    "version": "1.0.0",
+    "directories": {
+        "test": "test"
+    },
+    "dependencies": {
+        "jasmine": "^3.6.3",
+        "nodom": "^2.4.0"
+    },
+    "devDependencies": {
+        "redom": "^3.27.1"
+    },
+    "scripts": {
+        "test": "jasmine"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/OliRadlett/f28wp.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/OliRadlett/f28wp/issues"
+    },
+    "homepage": "https://github.com/OliRadlett/f28wp#readme"
+}

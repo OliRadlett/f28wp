@@ -18,6 +18,6 @@
   "homepage": "https://github.com/OliRadlett/f28wp#readme",
   "dependencies": {
     "readline": "^1.3.0",
-    "ws": "^7.3.1"
+    "ws": "^7.4.0"
   }
 }

@@ -21,7 +21,7 @@ function start(playerID) {
     setInterval(() => {
 
         webSocket.send(JSON.stringify({
-            
+
             type: "playerCoords",
             id: player.getID,
             x: player.getX,
@@ -42,7 +42,7 @@ function start(playerID) {
             // TODO handle clients disconnecting
 
             case "clientConnected":
-                
+
                 createClient({
                     id: message.id,
                     x: message.x,
@@ -83,7 +83,7 @@ function start(playerID) {
                     }
 
                 }
-                
+
                 break;
 
             case "syncEnemies":
@@ -91,7 +91,9 @@ function start(playerID) {
 
                     // console.log(message.enemies[i]);
 
-                    if (enemies.find((e) => {return e.id == message.enemies[i].id;})) {
+                    if (enemies.find((e) => {
+                            return e.id == message.enemies[i].id;
+                        })) {
 
                         // TODO use setters
                         enemies[message.enemies[i].id].x = message.enemies[i].x;
@@ -110,7 +112,7 @@ function start(playerID) {
                 }
                 break;
 
-            // Used only for development
+                // Used only for development
             case "restart":
                 location.reload();
                 break;
@@ -155,14 +157,14 @@ function update(delta) {
     // VERY TEMP
     if (!UP && !DOWN && !LEFT && !RIGHT) {
 
-        if (player.direction == directions.left) {
+        if (player.direction == player.directions.left) {
 
             player.element.style.backgroundImage = "url('res/classes/knight/player_still_left.png')";
 
 
         }
-        
-        if (player.direction == directions.right) {
+
+        if (player.direction == player.directions.right) {
 
             player.element.style.backgroundImage = "url('res/classes/knight/player_still_right.png')";
 
@@ -201,9 +203,9 @@ function getCoordinates(id) {
     let top = parseInt(element.style.top.replace("px", ""), 10);
 
     return {
-            left: left, 
-            top: top
-        };
+        left: left,
+        top: top
+    };
 
 }
 
@@ -213,10 +215,3 @@ function createClient(client) {
     clients.push(new Client(client.id, client.x, client.y));
 
 }
-
-let directions = {
-
-    left: 0,
-    right: 1
-        
-};
