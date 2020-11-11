@@ -35,8 +35,8 @@ Things we've done/working to improve:
 
 #### Roles and tasks
  ##### Diego to do:
- 1. Making options page which links the start menu with an option html page 
- 1. Characters imagies 
+ 1. Making options page which links the start menu with an option html page - Completed
+ 1. Characters imagies - Completed
 
 ##### Haia to do:
  1. Link "start game" with an HTML page called character selection
