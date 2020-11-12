@@ -165,3 +165,8 @@ if (typeof module == "undefined") {
 }
 
 module.exports = Player;
+
+//character's health if they get hit, they will loose health, the id for this is in character_selection.html
+//not sure if this works
+let health = document.getElementById("health")
+health.value -= 10;
