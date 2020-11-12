@@ -5,6 +5,7 @@ class Player {
         this.x = 0;
         this.y = 0;
         this.speed = 1;
+        this.health = 100
         this.id = id;
         this.directions = {
             left: 0,
@@ -30,6 +31,10 @@ class Player {
 
 
         document.getElementById("playerId").innerHTML = "Client id: " + id;
+
+        //character's health if they get hit, they will loose health, the id for this is in character_selection.html
+        //not sure if this works
+        
 
     }
 
@@ -203,8 +208,3 @@ if (typeof module == "undefined") {
 }
 
 module.exports = Player;
-
-//character's health if they get hit, they will loose health, the id for this is in character_selection.html
-//not sure if this works
-let health = document.getElementById("health")
-health.value -= 10;
