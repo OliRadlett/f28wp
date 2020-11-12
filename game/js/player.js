@@ -12,16 +12,19 @@ class Player {
         };
         this.direction = this.directions.right;
 
-        
+        this.playerClass = playerClass
         //playerClass is the way to choose what class the player is. Right now it needs to be changed in the code
-        this.playerClass = "wizard";
+        this.playerClass = "knight";
         //TODO make it so clicking on the character select will pick the right class
-        //this.playerClass = playerClass
 
+        //Makes the archer class speedy
+        if (this.playerClass == "archer") {
+            this.speed = 1.5;
+        }
         // TODO Create the player element here inside the player class
         this.element = document.getElementById("player");
 
-        this.element.style.backgroundImage = "url('res/classes/" + this.playerClass + "/player_walk_right.gif')";
+        this.element.style.backgroundImage = "url('res/classes/" + this.playerClass + "/player_still_right.png')";
 
 
 
@@ -73,7 +76,9 @@ class Player {
         }
 
         // Temp
-        this.element.style.backgroundImage = "url('res/classes/" + this.playerClass + "/player_walk_left.gif')";
+        if (!ATTACK) {
+            this.element.style.backgroundImage = "url('res/classes/" + this.playerClass + "/player_walk_left.gif')";
+        }
         this.direction = this.directions.left;
 
     }
@@ -90,12 +95,45 @@ class Player {
         }
 
         // Temp
-        this.element.style.backgroundImage = "url('res/classes/" + this.playerClass + "/player_walk_right.gif')";
+        if (!ATTACK) {
+
+            this.element.style.backgroundImage = "url('res/classes/" + this.playerClass + "/player_walk_right.gif')";
+        }
         this.direction = this.directions.right;
 
 
     }
 
+    //Beginning of an attack, it stops player movement then plays the attack gif
+    attack() {
+
+        UP = false;
+        DOWN = false;
+        LEFT = false;
+        RIGHT = false;
+        if (this.direction == this.directions.right) {
+            this.element.style.backgroundImage = "url('res/classes/" + this.playerClass + "/player_attack_right.gif')";
+            //alert("Going right");
+        }
+        else if (this.direction == this.directions.left) {
+            this.element.style.backgroundImage = "url('res/classes/" + this.playerClass + "/player_attack_left.gif')";
+            //alert("Going left");
+        }
+        //alert("Attack");
+        if (this.playerClass == "archer") {
+            setTimeout(function () { ATTACK = false; }, 2428.57);
+
+        }
+        else if (this.playerClass == "knight") {
+            setTimeout(function () { ATTACK = false; }, 1857.14);
+
+        }
+        else if (this.playerClass == "wizard") {
+            setTimeout(function () { ATTACK = false; }, 2142.86);
+
+
+        }
+    }
 
 
     // TODO Rename getters and setters in the form below

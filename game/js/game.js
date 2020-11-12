@@ -153,17 +153,20 @@ function update(delta) {
         player.right();
 
     }
+    if (ATTACK) {
+        player.attack();
+    }
 
     // VERY TEMP
-    if (!UP && !DOWN && !LEFT && !RIGHT) {
+    if (!UP && !DOWN && !LEFT && !RIGHT && !ATTACK) {
 
         if (player.direction == player.directions.left) {
             //Old code
             //player.element.style.backgroundImage = "url('res/classes/knight/player_still_left.png')";
-            
+
             //Changes the sprite of the player depending on their class. Probably a better way of doing this
-            player.element.style.backgroundImage = "url('res/classes/"+player.playerClass+"/player_still_left.png')";
-        
+            player.element.style.backgroundImage = "url('res/classes/" + player.playerClass + "/player_still_left.png')";
+
         }
 
         if (player.direction == player.directions.right) {
@@ -172,8 +175,8 @@ function update(delta) {
             //player.element.style.backgroundImage = "url('res/classes/knight/player_still_right.png')";
 
             //Changes the sprite of the player depending on their class. Probably a better way of doing this
-            player.element.style.backgroundImage = "url('res/classes/"+player.playerClass+"/player_still_right.png')";
-       
+            player.element.style.backgroundImage = "url('res/classes/" + player.playerClass + "/player_still_right.png')";
+
         }
 
     }
