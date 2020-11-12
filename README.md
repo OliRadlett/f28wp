@@ -26,6 +26,7 @@ Things we've done/working to improve:
 1. Made the character selection page more interactive
 1. The option menu now has sliders for the music volume
 1. Added more images to use in the game such as heart, world map, skeleton...etc
+2. Add a health = 100 to the player's contructor class
 
 
 
@@ -41,4 +42,4 @@ Things we've done/working to improve:
 ##### Haia to do:
  1. Link "start game" with an HTML page called character selection (done)
  1. Building the character page  (mostly done, I'm stuck on moving a character you press on to the game's map)
- 2. I made basic character's health system in player.js but I need to improve on it or change it, still need some research
+ 2. I made basic character's health system in player.js but I need to improve on it or change it, still need some research (done)
