@@ -4,6 +4,8 @@ let UP = false;
 let DOWN = false;
 let LEFT = false;
 let RIGHT = false;
+//For the attack button
+let ATTACK = false;
 
 // TEMP!!!
 // Normally we'd use the map size but the map isn't finished yet
@@ -79,7 +81,9 @@ function setupControls() {
     document.addEventListener("keydown", (event) => {
 
         switch (event.key) {
-
+            case "k":
+                ATTACK = true;
+                break;
             case "w":
                 UP = true;
                 break;
@@ -95,6 +99,8 @@ function setupControls() {
             case "d":
                 RIGHT = true;
                 break;
+
+            
 
             default:
                 break;
@@ -123,6 +129,7 @@ function setupControls() {
                 RIGHT = false;
                 break;
 
+            
             default:
                 break;
 
