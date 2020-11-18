@@ -1,5 +1,6 @@
 let player;
 let clients = [];
+let map;
 // Not a fan of this
 let enemies = [];
 let enemies_class = [];
@@ -12,6 +13,7 @@ let interval = 1; // We use 1ms for LAN but we need this to be higher when the s
 
 function start(playerID) {
 
+    map = new Map();
     player = new Player(playerID);
     window.requestAnimationFrame(update);
 
@@ -92,8 +94,8 @@ function start(playerID) {
                     // console.log(message.enemies[i]);
 
                     if (enemies.find((e) => {
-                        return e.id == message.enemies[i].id;
-                    })) {
+                            return e.id == message.enemies[i].id;
+                        })) {
 
                         // TODO use setters
                         enemies[message.enemies[i].id].x = message.enemies[i].x;
@@ -112,7 +114,7 @@ function start(playerID) {
                 }
                 break;
 
-            // Used only for development
+                // Used only for development
             case "restart":
                 location.reload();
                 break;
@@ -162,20 +164,20 @@ function update(delta) {
 
         if (player.direction == player.directions.left) {
             //Old code
-            //player.element.style.backgroundImage = "url('res/classes/knight/player_still_left.png')";
+            player.element.style.backgroundImage = "url('res/classes/knight/player_still_left.png')";
 
             //Changes the sprite of the player depending on their class. Probably a better way of doing this
-            player.element.style.backgroundImage = "url('res/classes/" + player.playerClass + "/player_still_left.png')";
+            // player.element.style.backgroundImage = "url('res/classes/" + player.playerClass + "/player_still_left.png')";
 
         }
 
         if (player.direction == player.directions.right) {
 
             //Old code
-            //player.element.style.backgroundImage = "url('res/classes/knight/player_still_right.png')";
+            player.element.style.backgroundImage = "url('res/classes/knight/player_still_right.png')";
 
             //Changes the sprite of the player depending on their class. Probably a better way of doing this
-            player.element.style.backgroundImage = "url('res/classes/" + player.playerClass + "/player_still_right.png')";
+            // player.element.style.backgroundImage = "url('res/classes/" + player.playerClass + "/player_still_right.png')";
 
         }
 

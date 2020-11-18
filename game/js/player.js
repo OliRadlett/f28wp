@@ -1,52 +1,41 @@
 class Player {
 
-    constructor(id, playerClass) {
+    constructor(id) {
 
         this.x = 0;
         this.y = 0;
         this.speed = 1;
-        this.health = 100
+        this.health = 100;
         this.id = id;
         this.directions = {
             left: 0,
             right: 1
         };
         this.direction = this.directions.right;
-
-        this.playerClass = playerClass
-        //playerClass is the way to choose what class the player is. Right now it needs to be changed in the code
-        this.playerClass = "knight";
-        //TODO make it so clicking on the character select will pick the right class
-
-        //Makes the archer class speedy
-        if (this.playerClass == "archer") {
-            this.speed = 1.5;
-        }
         // TODO Create the player element here inside the player class
         this.element = document.getElementById("player");
-
-        this.element.style.backgroundImage = "url('res/classes/" + this.playerClass + "/player_still_right.png')";
-
-
-
-
+        this.collisionMask = document.body.appendChild(this.createCollisionMask());
+        this.element.style.backgroundImage = "url('res/classes/knight/player_walk_right.gif')";
         document.getElementById("playerId").innerHTML = "Client id: " + id;
-
-        //character's health if they get hit, they will loose health, the id for this is in character_selection.html
-        //not sure if this works
-        
 
     }
 
     // All this shit is basically copied from game.js so it could do with a rewrite at some point to make it more efficient
 
-
     up() {
 
         let dy = this.y - this.speed;
+        this.collisionMask.style.top = dy + "px";
+        this.collisionMask.style.left = this.x + "px";
+        let canMove = true;
 
-        // Fix the calculations to that > 0 instead of > -10 before handing in
-        if (dy > -10) {
+        if (map.collidables[Math.round(this.x / 64)][Math.round(dy / 64)]) {
+
+            canMove = false;
+
+        }
+
+        if (canMove) {
 
             this.y = dy;
             this.element.style.top = this.y + "px";
@@ -58,8 +47,17 @@ class Player {
     down() {
 
         let dy = this.y + this.speed;
+        this.collisionMask.style.top = dy + "px";
+        this.collisionMask.style.left = this.x + "px";
+        let canMove = true;
 
-        if (dy < 10000) {
+        if (map.collidables[Math.round(this.x / 64)][Math.round(dy / 64)]) {
+
+            canMove = false;
+
+        }
+
+        if (canMove) {
 
             this.y = dy;
             this.element.style.top = this.y + "px";
@@ -71,9 +69,17 @@ class Player {
     left() {
 
         let dx = this.x - this.speed;
+        this.collisionMask.style.top = this.y + "px";
+        this.collisionMask.style.left = dx + "px";
+        let canMove = true;
 
-        // Fix the calculations to that > 0 instead of > -10 before handing in
-        if (dx > -10) {
+        if (map.collidables[Math.round(dx / 64)][Math.round(this.y / 64)]) {
+
+            canMove = false;
+
+        }
+
+        if (canMove) {
 
             this.x = dx;
             this.element.style.left = this.x + "px";
@@ -81,9 +87,7 @@ class Player {
         }
 
         // Temp
-        if (!ATTACK) {
-            this.element.style.backgroundImage = "url('res/classes/" + this.playerClass + "/player_walk_left.gif')";
-        }
+        this.element.style.backgroundImage = "url('res/classes/knight/player_walk_left.gif')";
         this.direction = this.directions.left;
 
     }
@@ -91,8 +95,17 @@ class Player {
     right() {
 
         let dx = this.x + this.speed;
+        this.collisionMask.style.top = this.y + "px";
+        this.collisionMask.style.left = dx + "px";
+        let canMove = true;
 
-        if (dx < 10000) {
+        if (map.collidables[Math.round(dx / 64)][Math.round(this.y / 64)]) {
+
+            canMove = false;
+
+        }
+
+        if (canMove) {
 
             this.x = dx;
             this.element.style.left = this.x + "px";
@@ -100,46 +113,32 @@ class Player {
         }
 
         // Temp
-        if (!ATTACK) {
-
-            this.element.style.backgroundImage = "url('res/classes/" + this.playerClass + "/player_walk_right.gif')";
-        }
+        this.element.style.backgroundImage = "url('res/classes/knight/player_walk_right.gif')";
         this.direction = this.directions.right;
 
 
     }
 
-    //Beginning of an attack, it stops player movement then plays the attack gif
-    attack() {
+    createCollisionMask() {
 
-        UP = false;
-        DOWN = false;
-        LEFT = false;
-        RIGHT = false;
-        if (this.direction == this.directions.right) {
-            this.element.style.backgroundImage = "url('res/classes/" + this.playerClass + "/player_attack_right.gif')";
-            //alert("Going right");
-        }
-        else if (this.direction == this.directions.left) {
-            this.element.style.backgroundImage = "url('res/classes/" + this.playerClass + "/player_attack_left.gif')";
-            //alert("Going left");
-        }
-        //alert("Attack");
-        if (this.playerClass == "archer") {
-            setTimeout(function () { ATTACK = false; }, 2428.57);
+        let e = document.createElement("div");
 
-        }
-        else if (this.playerClass == "knight") {
-            setTimeout(function () { ATTACK = false; }, 1857.14);
-
-        }
-        else if (this.playerClass == "wizard") {
-            setTimeout(function () { ATTACK = false; }, 2142.86);
+        e.className = "playerCollisionMask";
+        e.style.top = this.y + "px";
+        e.style.left = this.x + "px";
+        e.style.width = "64px";
+        e.style.height = "64px";
+        e.style.position = "absolute";
+        e.style.zIndex = 11;
 
 
-        }
+        // [DEBUG ONLY]
+        e.style.backgroundColor = "blue";
+        e.style.opacity = 0.3;
+
+        return e;
+
     }
-
 
     // TODO Rename getters and setters in the form below
     /*

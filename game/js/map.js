@@ -32,6 +32,14 @@ class Map {
 
             let width = data.width;
             let height = data.height;
+            // JS is weird ok
+            this.collidables = [...Array(width).keys()].map(i => Array(height));
+
+            for (let i = 0; i < width; i++) {
+                for (let ii = 0; ii < height; ii++) {
+                    this.collidables[i][ii] = false;
+                }
+            }
 
             for (let layer in data.layers) {
 
@@ -39,11 +47,12 @@ class Map {
                 if (layer != 0) {
 
                     let y = 0;
-                    let x = -1;
+                    let x = 0;
+
+                    // Map shit might not be quite in the right position but idk yet
+                    // I'll check later
 
                     for (let i in data.layers[layer].data) {
-
-                        x++;
 
                         switch (data.layers[layer].data[i]) {
 
@@ -65,13 +74,19 @@ class Map {
 
                             case this.objects.smallobjects.boundary:
 
-                                document.body.appendChild(this.drawDebugWall(x * 64, y * 64));
+                                // document.body.appendChild(this.drawDebugWall(x * 64, y * 64));
+                                // console.log(x + " " + y)
+                                // Need to use x instead of x - 1 to make it work
+                                this.collidables[x][y] = true;
                                 break;
 
                             default:
+                                // this.collidables[x][y] = false;
                                 break;
 
                         }
+
+                        x++;
 
                         if (x == width) {
 
@@ -158,6 +173,12 @@ class Map {
         return this.height;
 
     }
+
+    // get collidables() {
+
+    //     return this.collidables;
+
+    // }
 
 }
 
