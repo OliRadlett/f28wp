@@ -43,3 +43,4 @@ Things we've done/working to improve:
  1. Link "start game" with an HTML page called character selection (done)
  1. Building the character page  (mostly done, I'm stuck on moving a character you press on to the game's map)
  2. I made basic character's health system in player.js but I need to improve on it or change it, still need some research (done)
+ 3. Working on the map
