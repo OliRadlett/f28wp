@@ -2,7 +2,11 @@ class Map {
 
     constructor() {
 
-        this.parseMap();
+        // Define collidables
+        this.collidables = null;
+
+        // Move the parsing outside the constructor and make it return a promise
+        // Then we can do map.parseMap().then(player = new Player())
 
     }
 
@@ -28,7 +32,7 @@ class Map {
 
         };
 
-        fetch("res/map.json").then(response => response.json()).then(data => {
+        return fetch("res/map.json").then(response => response.json()).then(data => {
 
             let width = data.width;
             let height = data.height;
@@ -173,6 +177,12 @@ class Map {
         return this.height;
 
     }
+
+    // set collidables(collidables) {
+
+    //     this.collidables = collidables;
+
+    // }
 
     // get collidables() {
 

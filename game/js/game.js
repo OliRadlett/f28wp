@@ -14,114 +14,125 @@ let interval = 1; // We use 1ms for LAN but we need this to be higher when the s
 function start(playerID) {
 
     map = new Map();
-    player = new Player(playerID);
-    window.requestAnimationFrame(update);
 
-    // This shit has to be in a function or it gets executed before the websocket is ready
-    // But this is a very lazy place to put it, I'll probably move it at some point
+    // Use parseMap as a promise to make sure the map is parsed before the player is created so we can use map data in the player constructor
+    map.parseMap().then(() => {
+        player = new Player(playerID);
 
-    setInterval(() => {
 
-        webSocket.send(JSON.stringify({
+        /*
+        TEMP - this all needs moving to a seperate function which can be called inside this promise
+        */
 
-            type: "playerCoords",
-            id: player.getID,
-            x: player.getX,
-            y: player.getY
+        window.requestAnimationFrame(update);
 
-        }));
+        // This shit has to be in a function or it gets executed before the websocket is ready
+        // But this is a very lazy place to put it, I'll probably move it at some point
 
-    }, interval);
+        setInterval(() => {
 
-    webSocket.onmessage = (message) => {
+            webSocket.send(JSON.stringify({
 
-        // TODO handle not JSON messages without crashing
+                type: "playerCoords",
+                id: player.getID,
+                x: player.getX,
+                y: player.getY
 
-        message = JSON.parse(message.data);
+            }));
 
-        switch (message.type) {
+        }, interval);
 
-            // TODO handle clients disconnecting
+        webSocket.onmessage = (message) => {
 
-            case "clientConnected":
+            // TODO handle not JSON messages without crashing
 
-                createClient({
-                    id: message.id,
-                    x: message.x,
-                    y: message.y
-                });
-                break;
+            message = JSON.parse(message.data);
 
-            case "playerCoords":
+            switch (message.type) {
 
-                for (let i = 0; i < clients.length; i++) {
+                // TODO handle clients disconnecting
 
-                    if (message.id == clients[i].id) {
+                case "clientConnected":
 
-                        // TODO use setter functions
-                        clients[i].x = message.x;
-                        clients[i].y = message.y;
+                    createClient({
+                        id: message.id,
+                        x: message.x,
+                        y: message.y
+                    });
+                    break;
 
-                    }
+                case "playerCoords":
 
-                }
+                    for (let i = 0; i < clients.length; i++) {
 
-                break;
+                        if (message.id == clients[i].id) {
 
-            case "synchroniseClients":
+                            // TODO use setter functions
+                            clients[i].x = message.x;
+                            clients[i].y = message.y;
 
-                for (let i = 0; i < message.clients.length; i++) {
-
-                    let client = message.clients[i];
-
-                    if (client.id != player.getID) {
-
-                        createClient({
-                            id: client.id,
-                            x: client.x,
-                            y: client.y
-                        });
+                        }
 
                     }
 
-                }
+                    break;
 
-                break;
+                case "synchroniseClients":
 
-            case "syncEnemies":
-                for (i = 0; i < message.enemies.length; i++) {
+                    for (let i = 0; i < message.clients.length; i++) {
 
-                    // console.log(message.enemies[i]);
+                        let client = message.clients[i];
 
-                    if (enemies.find((e) => {
-                            return e.id == message.enemies[i].id;
-                        })) {
+                        if (client.id != player.getID) {
 
-                        // TODO use setters
-                        enemies[message.enemies[i].id].x = message.enemies[i].x;
-                        enemies[message.enemies[i].id].y = message.enemies[i].y;
-                        enemies_class[i].x = message.enemies[i].x;
-                        enemies_class[i].y = message.enemies[i].y;
+                            createClient({
+                                id: client.id,
+                                x: client.x,
+                                y: client.y
+                            });
 
-                    } else {
-
-                        enemies.push(message.enemies[i]);
-                        // TODO make this do different types of enemy
-                        enemies_class.push(new Melee(message.enemies[i].x, message.enemies[i].y, message.enemies[i].id));
+                        }
 
                     }
 
-                }
-                break;
+                    break;
 
-                // Used only for development
-            case "restart":
-                location.reload();
-                break;
+                case "syncEnemies":
+                    for (i = 0; i < message.enemies.length; i++) {
 
-        }
+                        // console.log(message.enemies[i]);
 
-    };
+                        if (enemies.find((e) => {
+                                return e.id == message.enemies[i].id;
+                            })) {
+
+                            // TODO use setters
+                            enemies[message.enemies[i].id].x = message.enemies[i].x;
+                            enemies[message.enemies[i].id].y = message.enemies[i].y;
+                            enemies_class[i].x = message.enemies[i].x;
+                            enemies_class[i].y = message.enemies[i].y;
+
+                        } else {
+
+                            enemies.push(message.enemies[i]);
+                            // TODO make this do different types of enemy
+                            enemies_class.push(new Melee(message.enemies[i].x, message.enemies[i].y, message.enemies[i].id));
+
+                        }
+
+                    }
+                    break;
+
+                    // Used only for development
+                case "restart":
+                    location.reload();
+                    break;
+
+            }
+
+        };
+
+    });
 
 }
 

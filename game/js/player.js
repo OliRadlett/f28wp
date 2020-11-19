@@ -2,8 +2,11 @@ class Player {
 
     constructor(id) {
 
-        this.x = 0;
-        this.y = 0;
+        let startingCoordinates = this.generateStartingCoordinates();
+
+        this.x = startingCoordinates.x;
+        this.y = startingCoordinates.y;
+
         this.speed = 1;
         this.health = 100;
         this.id = id;
@@ -20,6 +23,64 @@ class Player {
 
     }
 
+    generateStartingCoordinates() {
+
+        // NOTE - THIS IS ONLY FOR NEW PLAYERS, RETURNING PLAYERS WILL SPAWN IN THEIR LAST KNOWN POSITION
+
+        // This method is not truely random because some of edges contain more than one boundary object (corners for example) but it works well enough :)
+
+        let isValid = false;
+        let x = null;
+        let y = null;
+
+        while (!isValid) {
+
+            let dx = Math.floor(Math.random() * 15360);
+            let dy = Math.floor(Math.random() * 15360);
+
+            if (map.collidables[Math.floor(dx / 64)][Math.floor(dy / 64)]) {
+
+                // Generate a new set of coordinates if we are on the edge of the map
+                continue;
+
+            }
+
+            // https://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/
+
+            let count = 0;
+
+            // Not this might have to change if we include shit like houses in this array
+            // Could fix this by having map borders stored in a seprate array as well as in collidables
+            // But this works as a proof of concept
+
+            for (let row = Math.floor(dx / 64); row < map.collidables.length; row++) {
+
+                if (map.collidables[row][Math.floor(dy / 64)]) {
+
+                    count++;
+
+                }
+
+            }
+
+            // If count is odd
+            if (count % 2 != 0) {
+
+                x = dx;
+                y = dy;
+                isValid = true;
+
+            }
+
+        }
+
+        return {
+            x: x,
+            y: y
+        };
+
+    }
+
     // All this shit is basically copied from game.js so it could do with a rewrite at some point to make it more efficient
 
     up() {
@@ -29,6 +90,7 @@ class Player {
         this.collisionMask.style.left = this.x + "px";
         let canMove = true;
 
+        // Could swap Math.round with Math.floor to improve collisions idk
         if (map.collidables[Math.round(this.x / 64)][Math.round(dy / 64)]) {
 
             canMove = false;
