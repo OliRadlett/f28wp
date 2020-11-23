@@ -5,6 +5,7 @@
     <title>Character Selection</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="css/character_selection.css" />
+    <script type="text/javascript" src="js/menu.js"></script>
 </head>
 
 <body>
@@ -24,31 +25,34 @@
             <tr>
                 <th>
                     <div class="b">
-                        <a href="index.html" class="button">Archer</a>
+                        <p class="button">Archer</p>
                     </div>
                 </th>
 
                 <th>
                     <div class="b">
-                        <a href="index.html" class="button">Knight</a>
+                        <p class="button">Knight</p>
                     </div>
                 </th>
 
                 <th>
                     <div class="b">
-                        <a href="index.html" class="button">Wizard</a>
+                        <p class="button">Wizard</p>
                     </div>
                 </th>
             </tr>
             <tr>
-                <td><img id="Archer" src="Sprites\Archer_1 x10.png"><img id="Archer_Walk" src="Sprites\Archer_1 Walk v2 x10.gif"></td>
+                <td onclick="createAccount()"><img id="Archer" src="Sprites\Archer_1 x10.png"><img id="Archer_Walk" src="Sprites\Archer_1 Walk v2 x10.gif"></td>
                 <td><img id="Knight" src="Sprites\Knight_1 x10.png"><img id="Knight_Walk" src="Sprites/Knight_1 walk v1 7fps x10.gif"></td>
                 <td><img id="Wizard" src="Sprites/Wizard_1 x10.png"><img id="Wizard_Walk" src="Sprites/Wizard_1  walk v1 x10.gif"></td>
             </tr>
             <tr>
                 <!-- Spooky shit be happening here -->
                 <td>
-                    <input type="text" placeholder="Enter player name" />
+                    <input type="text" id="username" placeholder="Enter player name" />
+                </td>
+                <td>
+                    <input type="password" id="password" placeholder="Password" />
                 </td>
             </tr>
 
