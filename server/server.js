@@ -391,6 +391,105 @@ app.get("/login", async (request, response) => {
 
 });
 
+app.post("/create-account", (request, response) => {
+
+    let username = request.query.username;
+    let password = request.query.password;
+
+    if (!username || !password) {
+
+        response.status(400);
+        response.send("Please supply a username and password");
+        return;
+
+    }
+
+    MongoClient.connect(uri, {
+        poolSize: 10
+    }, (error, client) => {
+
+        if (error)
+            return;
+
+        const database = client.db('f28wp');
+        const collection = database.collection('users');
+
+        // Search the database to see if the username already exists
+        collection.findOne({
+            username: username
+        }, (error, result) => {
+
+            if (error) {
+
+                // Server error
+                response.status(500);
+                response.send(error);
+                client.close();
+                return;
+
+            } else {
+
+                if (result) {
+
+                    // User already exists
+                    response.status(409);
+                    response.send("Error - Username is taken");
+                    client.close();
+                    return;
+
+                } else {
+
+                    bcrypt.hash(password, 8, (error, hash) => {
+
+                        if (error) {
+
+                            // Server error
+                            response.status(500);
+                            response.send(error);
+                            client.close();
+                            return;
+
+                        } else {
+
+                            collection.insertOne({
+                                username: username,
+                                password: hash
+                            }, (error, result) => {
+
+                                if (error) {
+
+                                    // Server error
+                                    response.status(500);
+                                    response.send(error);
+                                    client.close();
+                                    return;
+
+                                } else {
+
+                                    // User created successfully
+                                    response.status(201);
+                                    response.send("User created");
+                                    client.close();
+                                    return;
+
+                                }
+
+                            });
+
+                        }
+
+                    });
+
+                }
+
+            }
+
+        });
+
+    });
+
+});
+
 app.listen(8081);
 
 
