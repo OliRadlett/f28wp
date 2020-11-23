@@ -290,30 +290,6 @@ app.use(bodyParser.json());
 // Don't commit with the password like this
 const uri = "mongodb+srv://Oli:Java12345@f28wp.ofdqn.mongodb.net/f28wp?retryWrites=true&w=majority";
 
-
-// This is pretty much just a test method
-app.get("/users", (request, response) => {
-
-    MongoClient.connect(uri, (error, client) => {
-
-        if (error)
-            return;
-
-        const database = client.db('f28wp');
-        const collection = database.collection('users');
-        collection.find({}).toArray((error, result) => {
-
-            if (!error)
-                response.send(result);
-
-        });
-
-        client.close();
-
-    });
-
-});
-
 app.get("/login", async (request, response) => {
 
     let username = request.query.username;
