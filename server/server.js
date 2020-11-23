@@ -8,18 +8,6 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
 const readline = require("readline");
-const {
-    response
-} = require("express");
-const {
-    request
-} = require("http");
-const {
-    brotliCompressSync
-} = require("zlib");
-const {
-    exit
-} = require("process");
 
 
 // Game server
