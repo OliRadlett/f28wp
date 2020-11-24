@@ -1,12 +1,10 @@
-<!-- Someone else style this please -->
-
-
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Continue game...</title>
     <link type="text/css" rel="stylesheet" href="css/continue.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
     <script type="text/javascript" src="js/menu.js"></script>
 </head>
 
@@ -14,31 +12,18 @@
 
     <div class="container">
         <div class="sliding-background"></div>
-
-      <table>
-    <!-- CSS rules for removing default styles from inputs can be found in character_selection.css -->
-       <tr>
-         <th>
-            <input type="text" placeholder="Username" id="username" />
-         </th>   
-   
-         <th>
-           <input type="password" placeholder="Password" id="password" />
-         </th>
-
-         <th>
-           <button type="submit" onclick="login()">Log in</button>
-         </th>  
-
-         <th>
-           <p id="debug"></p>
-         </th>  
-
-        </tr>
-      </table>
-
+        <table>
+            <tr>
+                <td class="hover"><input type="text" placeholder="Username" id="username" /></td>
+            </tr>
+            <tr>
+                <td class="hover"><input type="password" placeholder="Password" id="password" /></td>
+            </tr>
+            <tr>
+                <td class="log-in hover" onclick="login()">Log in</td>
+            </tr>
+        </table>
     </div>
- 
 </body>
 
 </html>
