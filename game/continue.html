@@ -6,15 +6,39 @@
 
 <head>
     <title>Continue game...</title>
+    <link type="text/css" rel="stylesheet" href="css/continue.css" />
     <script type="text/javascript" src="js/menu.js"></script>
 </head>
 
 <body>
+
+    <div class="container">
+        <div class="sliding-background"></div>
+
+      <table>
     <!-- CSS rules for removing default styles from inputs can be found in character_selection.css -->
-    <input type="text" placeholder="Username" id="username" />
-    <input type="password" placeholder="Password" id="password" />
-    <button type="submit" onclick="login()">Log in</button>
-    <p id="debug"></p>
+       <tr>
+         <th>
+            <input type="text" placeholder="Username" id="username" />
+         </th>   
+   
+         <th>
+           <input type="password" placeholder="Password" id="password" />
+         </th>
+
+         <th>
+           <button type="submit" onclick="login()">Log in</button>
+         </th>  
+
+         <th>
+           <p id="debug"></p>
+         </th>  
+
+        </tr>
+      </table>
+
+    </div>
+ 
 </body>
 
 </html>
