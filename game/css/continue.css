@@ -46,11 +46,24 @@ body {
 
 }
 
-a {
+table {
+    background: rgba(104, 237, 255, 0.6);
 
-  margin: 0px;
-    text-decoration: none;
-    color: black;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -181px;
+    margin-left: -499px;
 
 }
 
+th,
+td {
+    padding: 5px;
+    text-align: center;
+}
+
+
+td:hover {
+    background-color: rgba(97, 250, 255, 0.6);
+}
