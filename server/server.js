@@ -7,6 +7,7 @@ const MongoClient = require("mongodb");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
+const cryptojs = require("crypto-js");
 const readline = require("readline");
 
 
@@ -284,11 +285,15 @@ rl.on("line", (line) => {
 const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: false,
 }));
 app.use(bodyParser.json());
 // Don't commit with the password like this
 const uri = "mongodb+srv://Oli:Java12345@f28wp.ofdqn.mongodb.net/f28wp?retryWrites=true&w=majority";
+
+
+// Remember to do some kind of input validation here
+// Theres probably a npm module for this
 
 app.get("/login", async (request, response) => {
 
@@ -333,8 +338,11 @@ app.get("/login", async (request, response) => {
 
                             if (matches) {
 
+                                let token = cryptojs.AES.encrypt(result.username, result.key).toString();
                                 response.status(200);
-                                response.send("Password matches");
+                                response.send({
+                                    token: token
+                                });
 
                             } else {
 
@@ -427,10 +435,7 @@ app.post("/create-account", (request, response) => {
 
                         } else {
 
-                            collection.insertOne({
-                                username: username,
-                                password: hash
-                            }, (error, result) => {
+                            bcrypt.hash(new Date().toString(), 8, (error, key) => {
 
                                 if (error) {
 
@@ -440,20 +445,118 @@ app.post("/create-account", (request, response) => {
                                     client.close();
                                     return;
 
-                                } else {
-
-                                    // User created successfully
-                                    response.status(201);
-                                    response.send("User created");
-                                    client.close();
-                                    return;
-
                                 }
+
+                                let token = cryptojs.AES.encrypt(username, key).toString();
+
+                                collection.insertOne({
+                                    username: username,
+                                    password: hash,
+                                    key: key
+                                }, (error, result) => {
+
+                                    if (error) {
+
+                                        // Server error
+                                        response.status(500);
+                                        response.send(error);
+                                        client.close();
+                                        return;
+
+                                    } else {
+
+                                        // User created successfully
+                                        response.status(201);
+                                        response.send("User created - token: " + token);
+                                        client.close();
+                                        return;
+
+                                    }
+
+                                });
 
                             });
 
+
                         }
 
+                    });
+
+                }
+
+            }
+
+        });
+
+    });
+
+});
+
+app.get("/verify", (request, response) => {
+
+    /*
+    We can verify that a user has logged in by attempting to decrypt their login token with a unique secret key
+    that was generated when they first made the account.
+
+    If the result of the decryption is the same as the username of current logged in user then we know they've logged
+    in and not just changed the username variable
+    */
+
+
+
+    // Note we send the parameters as part of the body instead of the as URL parameters because URL encoding will break the tokens
+    let username = request.body.username;
+    let token = request.body.token;
+
+    MongoClient.connect(uri, (error, client) => {
+
+        if (error)
+            return;
+
+        const database = client.db('f28wp');
+        const collection = database.collection('users');
+
+        // Search the database to see if the user exists
+        collection.findOne({
+            username: username
+        }, (error, result) => {
+
+            if (error) {
+
+                // Server error
+                response.status(500);
+                response.send(error);
+                return;
+
+            } else {
+
+                if (result) {
+
+                    let key = result.key;
+                    let bytes = cryptojs.AES.decrypt(token, key);
+                    let decrypted = bytes.toString(cryptojs.enc.Utf8);
+
+                    if (decrypted === result.username) {
+
+                        response.status(200);
+                        response.send({
+                            verified: true
+                        });
+
+                    } else {
+
+                        response.status(403);
+                        response.send({
+                            verified: false
+                        });
+
+                    }
+
+                } else {
+
+                    response.status(404);
+                    response.send({
+                        verified: false
                     });
 
                 }
