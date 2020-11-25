@@ -3,7 +3,7 @@ body {
     font-size: 40px;
     background-color: #c9f6ff;
     color: black;
-    
+
     width: 100%;
     margin: 0px;
     font-family: 'Press Start 2P', cursive;
@@ -29,7 +29,7 @@ body {
    and uses slide animation runing it for 1 minute in a loop*/
 .sliding-background {
 
-    background-image: url(../Sprites/Cloud\ Background\ v2\ x5.png);
+    background-image: url(../res/menu/clouds.png);
     background-repeat: repeat-x;
     height: 100vh;
     width: 5076px;
@@ -37,7 +37,7 @@ body {
 
 }
 
-/* the container hides everything which is conyained outside of it */ 
+/* the container hides everything which is conyained outside of it */
 .container {
 
     overflow: hidden;
@@ -53,7 +53,7 @@ body {
 
 a {
 
-  margin: 0px;
+    margin: 0px;
     text-decoration: none;
     color: black;
 
@@ -88,6 +88,9 @@ a {
     border: 5px solid black;
     margin: auto;
     width: 400px;
-   
+
 }
-.b:hover {background-color: rgba(218, 191, 42, 0.6); }
+
+.b:hover {
+    background-color: rgba(218, 191, 42, 0.6);
+}
