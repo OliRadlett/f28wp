@@ -2,11 +2,6 @@ class Player {
 
     constructor(id) {
 
-        let startingCoordinates = this.generateStartingCoordinates();
-
-        this.x = startingCoordinates.x;
-        this.y = startingCoordinates.y;
-
         this.speed = 1;
         this.health = 100;
         this.id = id;
@@ -20,6 +15,42 @@ class Player {
         this.collisionMask = document.body.appendChild(this.createCollisionMask());
         this.element.style.backgroundImage = "url('res/classes/knight/player_walk_right.gif')";
         document.getElementById("playerId").innerHTML = "Client id: " + id;
+
+        let params = this.parse(window.location.search);
+
+        // this.username = params.get("username");
+        // this.token = params.get("token");
+
+        this.username = params[0][1];
+        this.token = params[1][1];
+
+
+        callApi("POST", "http://localhost:8081/verify", {
+            username: this.username,
+            token: this.token
+        }, (result) => {
+
+            if (result.verified) {
+
+                if (result.newPlayer === true) {
+
+                    let startingCoordinates = this.generateStartingCoordinates();
+
+                    this.x = startingCoordinates.x;
+                    this.y = startingCoordinates.y;
+
+                } else {
+
+                    console.log(result)
+
+                    this.x = result.x;
+                    this.y = result.y;
+
+                }
+
+            }
+
+        });
 
     }
 
@@ -196,7 +227,8 @@ class Player {
 
         // [DEBUG ONLY]
         e.style.backgroundColor = "blue";
-        e.style.opacity = 0.3;
+        // e.style.opacity = 0.3;
+        e.style.opacity = 0;
 
         return e;
 
@@ -255,6 +287,14 @@ class Player {
 
         this.speed = speed;
 
+    }
+
+
+    parse(qs) {
+        return qs.
+        replace(/^\?/, '').
+        split('&').
+        map(str => str.split('=').map(v => decodeURIComponent(v)));
     }
 
 }

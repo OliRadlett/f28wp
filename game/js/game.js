@@ -42,6 +42,31 @@ function start(playerID) {
 
         }, interval);
 
+        setInterval(() => {
+
+            let p = {
+                username: player.username,
+                token: player.token,
+                x: player.getX,
+                y: player.getY
+                // etc
+            };
+
+            callApi("POST", "http://localhost:8081/save", {
+                player: p
+            }, (result) => {
+
+                if (result.error) {
+
+                    // If there is an error saving alert the user
+                    alert(result.error);
+
+                }
+
+            });
+
+        }, 30000);
+
         webSocket.onmessage = (message) => {
 
             // TODO handle not JSON messages without crashing
@@ -211,7 +236,6 @@ function update(delta) {
     }
 
     // Player "camera"
-    // Need to make it so that the player is in the centre of the screen
     window.scroll(player.getX - ((window.innerWidth / 2) - 32), player.getY - ((window.innerHeight / 2) - 32));
 
     window.requestAnimationFrame(update);
@@ -237,3 +261,27 @@ function createClient(client) {
     clients.push(new Client(client.id, client.x, client.y));
 
 }
+
+const callApi = async (method, url, body, callback) => {
+
+    try {
+
+        const response = await fetch(url, {
+            method: method,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        });
+
+        const responseData = await response.json();
+
+        callback(responseData, response.status);
+
+    } catch (e) {
+
+        console.error(e);
+
+    }
+
+};

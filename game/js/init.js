@@ -100,8 +100,6 @@ function setupControls() {
                 RIGHT = true;
                 break;
 
-            
-
             default:
                 break;
 
@@ -129,7 +127,6 @@ function setupControls() {
                 RIGHT = false;
                 break;
 
-            
             default:
                 break;
 
@@ -143,6 +140,8 @@ function initMultiplayer() {
 
     // Very very basic
     // All this will need redoing soon
+
+    // Verify player here
 
     webSocket = new WebSocket("ws://localhost:8080");
 

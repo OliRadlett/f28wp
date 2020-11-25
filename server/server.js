@@ -10,7 +10,6 @@ const bcrypt = require("bcryptjs");
 const cryptojs = require("crypto-js");
 const readline = require("readline");
 
-
 // Game server
 
 let enemies = [];
@@ -317,7 +316,9 @@ app.get("/login", async (request, response) => {
 
                 // Server error
                 response.status(500);
-                response.send(error);
+                response.send({
+                    error: error
+                });
                 return;
 
             } else {
@@ -341,13 +342,17 @@ app.get("/login", async (request, response) => {
                                 let token = cryptojs.AES.encrypt(result.username, result.key).toString();
                                 response.status(200);
                                 response.send({
-                                    token: token
+                                    username: result.username,
+                                    token: token,
+                                    newPlayer: result.newPlayer
                                 });
 
                             } else {
 
                                 response.status(401);
-                                response.send("Username/password combination doesn't exist");
+                                response.send({
+                                    error: "Username/password combination doesn't exist"
+                                });
                                 return;
 
                             }
@@ -360,7 +365,9 @@ app.get("/login", async (request, response) => {
 
                     // User doesn't exist
                     response.status(404);
-                    response.send("Username/password combination doesn't exist");
+                    response.send({
+                        error: "Username/password combination doesn't exist"
+                    });
                     return;
 
                 }
@@ -417,7 +424,9 @@ app.post("/create-account", (request, response) => {
 
                     // User already exists
                     response.status(409);
-                    response.send("Error - Username is taken");
+                    response.send({
+                        error: "Error - Username is taken"
+                    });
                     client.close();
                     return;
 
@@ -452,7 +461,11 @@ app.post("/create-account", (request, response) => {
                                 collection.insertOne({
                                     username: username,
                                     password: hash,
-                                    key: key
+                                    key: key,
+                                    newPlayer: true,
+                                    // Define the coordinates so that they can be updated in /save
+                                    x: 0,
+                                    y: 0
                                 }, (error, result) => {
 
                                     if (error) {
@@ -467,7 +480,10 @@ app.post("/create-account", (request, response) => {
 
                                         // User created successfully
                                         response.status(201);
-                                        response.send("User created - token: " + token);
+                                        response.send({
+                                            username: username,
+                                            token: token
+                                        });
                                         client.close();
                                         return;
 
@@ -492,7 +508,7 @@ app.post("/create-account", (request, response) => {
 
 });
 
-app.get("/verify", (request, response) => {
+app.post("/verify", (request, response) => {
 
     /*
     We can verify that a user has logged in by attempting to decrypt their login token with a unique secret key
@@ -540,7 +556,11 @@ app.get("/verify", (request, response) => {
 
                         response.status(200);
                         response.send({
-                            verified: true
+                            verified: true,
+                            newPlayer: result.newPlayer,
+                            x: result.x,
+                            y: result.y
+                            // etc.
                         });
 
                     } else {
@@ -558,6 +578,83 @@ app.get("/verify", (request, response) => {
                     response.send({
                         verified: false
                     });
+
+                }
+
+            }
+
+        });
+
+    });
+
+});
+
+app.post("/save", (request, response) => {
+
+    let player = request.body.player;
+    console.log(player)
+
+    MongoClient.connect(uri, (error, client) => {
+
+        if (error)
+            return;
+
+        const database = client.db('f28wp');
+        const collection = database.collection('users');
+
+        // Search the database to see if the user exists
+        collection.findOne({
+            username: player.username
+        }, (error, result) => {
+
+            if (error) {
+
+                // Server error
+                response.status(500);
+                response.send(error);
+                return;
+
+            } else {
+
+                if (result) {
+
+                    let key = result.key;
+                    let bytes = cryptojs.AES.decrypt(player.token, key);
+                    let decrypted = bytes.toString(cryptojs.enc.Utf8);
+
+                    if (decrypted === result.username) {
+
+                        // Now we can save
+                        // We don't use findAndUpdate because we need to verify the token first
+                        collection.updateOne({
+                            username: player.username
+                        }, {
+                            $set: {
+                                x: player.x,
+                                y: player.y,
+                                // New player is always set to false here
+                                newPlayer: false
+                                // etc...
+                            }
+                        }, (error, result) => {
+
+                            if (error) {
+
+                                response.status(500);
+                                response.send(error);
+                                return;
+
+                            }
+
+                            response.status(201);
+                            response.send({
+                                status: "ok"
+                            });
+                            return;
+
+                        });
+
+                    }
 
                 }
 
