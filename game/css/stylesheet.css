@@ -6,6 +6,7 @@ body {
     padding: 0px;
     overflow: hidden;
     position: relative;
+    font-family: 'Press Start 2P', cursive;
 
 }
 
@@ -31,7 +32,7 @@ body {
 
 #playerId {
 
-    position: absolute;
+    position: fixed;
     z-index: 10;
     color: red;
 
@@ -41,4 +42,30 @@ body {
 
     background-color: red;
 
+}
+
+.ui {
+
+    z-index: 11;
+    position: fixed;
+    bottom: -4px;
+    left: 1vw;
+    /* width doesnt work cause 100% is fucking huge on this page */
+    width: 97vw;
+    height: 12%;
+    background-color: darkgrey;
+    border: 4px solid darkslategray;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#username {
+
+    color: white;
+    transform: translate(0, -50%);
+    position: relative;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 30px;
+    top: 50%;
 }

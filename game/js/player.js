@@ -14,8 +14,6 @@ class Player {
         this.element = document.getElementById("player");
         this.collisionMask = document.body.appendChild(this.createCollisionMask());
         this.element.style.backgroundImage = "url('res/classes/knight/player_walk_right.gif')";
-        document.getElementById("playerId").innerHTML = "Client id: " + id;
-
         let params = this.parse(window.location.search);
 
         try {
@@ -36,6 +34,8 @@ class Player {
         }, (result) => {
 
             if (result.verified) {
+
+                document.getElementById("username").innerHTML = "Username: " + this.username;
 
                 if (result.newPlayer === true) {
 
