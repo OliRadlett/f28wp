@@ -86,6 +86,9 @@ body {
 }
 
 
+/* This makes the image move from left to right in a loop that repeats
+   using transform property to posotion the left image at the left
+   edge of the container when animation begins */
 @keyframes slide {
     0% {
         transform: translate3d(0, 0, 0);
@@ -96,6 +99,8 @@ body {
     }
 }
 
+/* Callig slide animation, animation property instructs the class
+   and uses slide animation runing it for 1 minute in a loop*/
 .sliding-background {
 
 
@@ -108,7 +113,7 @@ body {
     animation: slide 60s linear infinite;
 }
 
-
+/* the container hides everything which is conyained outside of it */ 
 .container {
     overflow: hidden;
 
