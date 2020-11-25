@@ -40,7 +40,7 @@ body {
 
 }
 
-table {
+#characterSelection {
     background: rgba(220, 220, 220, 0.6);
 
     position: fixed;
@@ -48,7 +48,16 @@ table {
     left: 50%;
     margin-top: -181px;
     margin-left: -499px;
+}
+#accountStuff{
+    background: rgba(220, 220, 220, 0.6);
 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: 213px;
+    margin-left: -499px;
+    width: 998px;
 }
 
 th,

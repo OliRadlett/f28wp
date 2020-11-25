@@ -15,13 +15,14 @@
         <div id="gamearea" class="fixheight">
             <h1 id="gamestatus">Character Selection</h1>
             <div id="display" class="hft-fullcenter fixheight">
-                <div id="input" class="hft-instruction hft-fullcenter">Please select a class by clicking on the name</div>
+                <div id="input" class="hft-instruction hft-fullcenter">Please select a class by clicking on the name
+                </div>
                 <a href="start_menu.html" class="button">Back</a>
             </div>
             <div id="inputarea" class="hft-fullcenter fixheight"></div>
         </div>
 
-        <table>
+        <table id ="characterSelection">
             <tr>
                 <th>
                     <div class="b">
@@ -42,10 +43,18 @@
                 </th>
             </tr>
             <tr>
-                <td onclick="createAccount()"><img id="Archer" src="Sprites\Archer_1 x10.png"><img id="Archer_Walk" src="Sprites\Archer_1 Walk v2 x10.gif"></td>
-                <td><img id="Knight" src="Sprites\Knight_1 x10.png"><img id="Knight_Walk" src="Sprites/Knight_1 walk v1 7fps x10.gif"></td>
-                <td><img id="Wizard" src="Sprites/Wizard_1 x10.png"><img id="Wizard_Walk" src="Sprites/Wizard_1  walk v1 x10.gif"></td>
+                <td onclick="createAccount()"><img id="Archer" src="Sprites\Archer_1 x10.png"><img id="Archer_Walk"
+                        src="Sprites\Archer_1 Walk v2 x10.gif"></td>
+                <td><img id="Knight" src="Sprites\Knight_1 x10.png"><img id="Knight_Walk"
+                        src="Sprites/Knight_1 walk v1 7fps x10.gif"></td>
+                <td><img id="Wizard" src="Sprites/Wizard_1 x10.png"><img id="Wizard_Walk"
+                        src="Sprites/Wizard_1  walk v1 x10.gif"></td>
             </tr>
+            
+                
+            
+        </table>
+        <table id = "accountStuff">
             <tr>
                 <!-- Spooky shit be happening here -->
                 <td>
@@ -55,7 +64,6 @@
                     <input type="password" id="password" placeholder="Password" />
                 </td>
             </tr>
-
         </table>
 
     </div>
