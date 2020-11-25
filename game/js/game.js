@@ -199,21 +199,38 @@ function update(delta) {
     if (!UP && !DOWN && !LEFT && !RIGHT && !ATTACK) {
 
         if (player.direction == player.directions.left) {
-            //Old code
-            player.element.style.backgroundImage = "url('res/classes/knight/player_still_left.png')";
 
-            //Changes the sprite of the player depending on their class. Probably a better way of doing this
-            // player.element.style.backgroundImage = "url('res/classes/" + player.playerClass + "/player_still_left.png')";
+            switch (player.class) {
+
+                case "archer":
+                    player.element.style.backgroundImage = "url('res/classes/archer/player_still_left.png')";
+                    break;
+                case "knight":
+                    player.element.style.backgroundImage = "url('res/classes/knight/player_still_left.png')";
+                    break;
+                case "wizard":
+                    player.element.style.backgroundImage = "url('res/classes/wizard/player_still_left.png')";
+                    break;
+
+            }
 
         }
 
         if (player.direction == player.directions.right) {
 
-            //Old code
-            player.element.style.backgroundImage = "url('res/classes/knight/player_still_right.png')";
+            switch (player.class) {
 
-            //Changes the sprite of the player depending on their class. Probably a better way of doing this
-            // player.element.style.backgroundImage = "url('res/classes/" + player.playerClass + "/player_still_right.png')";
+                case "archer":
+                    player.element.style.backgroundImage = "url('res/classes/archer/player_still_right.png')";
+                    break;
+                case "knight":
+                    player.element.style.backgroundImage = "url('res/classes/knight/player_still_right.png')";
+                    break;
+                case "wizard":
+                    player.element.style.backgroundImage = "url('res/classes/wizard/player_still_right.png')";
+                    break;
+
+            }
 
         }
 

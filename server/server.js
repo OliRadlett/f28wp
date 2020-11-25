@@ -386,11 +386,25 @@ app.post("/create-account", (request, response) => {
 
     let username = request.query.username;
     let password = request.query.password;
+    let class_ = request.query.class;
 
-    if (!username || !password) {
+    let classes = ["archer", "knight", "wizard"];
+
+    if (!username || !password || !class_) {
 
         response.status(400);
-        response.send("Please supply a username and password");
+        response.send({
+            error: "Please supply a username and password"
+        });
+        return;
+
+    }
+
+    // Check that class is allowed
+    if (!class_ in classes) {
+
+        response.status(400);
+        response.send("Class doesn't exist");
         return;
 
     }
@@ -465,7 +479,8 @@ app.post("/create-account", (request, response) => {
                                     newPlayer: true,
                                     // Define the coordinates so that they can be updated in /save
                                     x: 0,
-                                    y: 0
+                                    y: 0,
+                                    class: class_
                                 }, (error, result) => {
 
                                     if (error) {
@@ -569,7 +584,8 @@ app.post("/verify", (request, response) => {
                             verified: true,
                             newPlayer: result.newPlayer,
                             x: result.x,
-                            y: result.y
+                            y: result.y,
+                            class: result.class
                             // etc.
                         });
 
