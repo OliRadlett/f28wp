@@ -22,16 +22,17 @@ function login() {
 
 }
 
-function createAccount() {
+function createAccount(class_) {
 
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
 
-    let url = "http://localhost:8081/create-account?username=" + username + "&password=" + password;
+    // We perform validation on the server - client side validation would be pretty useless here
+    let url = "http://localhost:8081/create-account?username=" + username + "&password=" + password + "&class=" + class_;
 
     callApi("POST", url, (data, status) => {
 
-        if (status == 200) {
+        if (status == 201) {
 
             window.location = "/game/index.html?username=" + data.username + "&token=" + data.token;
 

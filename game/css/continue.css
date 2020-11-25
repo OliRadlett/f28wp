@@ -29,7 +29,7 @@ body {
    and uses slide animation runing it for 1 minute in a loop*/
 .sliding-background {
 
-    background-image: url(../Sprites/Cloud\ Background\ v2\ x5.png);
+    background-image: url(../res/menu/clouds.png);
     background-repeat: repeat-x;
     height: 100vh;
     width: 5076px;
@@ -37,7 +37,7 @@ body {
 
 }
 
-/* the container hides everything which is conyained outside of it */ 
+/* the container hides everything which is conyained outside of it */
 .container {
 
     overflow: hidden;

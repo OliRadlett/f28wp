@@ -104,7 +104,7 @@ body {
 .sliding-background {
 
 
-    background-image: url(../Sprites/Cloud\ Background\ v2\ x5.png);
+    background-image: url(../res/menu/clouds.png);
     background-repeat: repeat-x;
 
 
@@ -113,7 +113,7 @@ body {
     animation: slide 60s linear infinite;
 }
 
-/* the container hides everything which is conyained outside of it */ 
+/* the container hides everything which is conyained outside of it */
 .container {
     overflow: hidden;
 

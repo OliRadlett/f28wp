@@ -22,7 +22,7 @@
             <div id="inputarea" class="hft-fullcenter fixheight"></div>
         </div>
 
-        <table id ="characterSelection">
+        <table id="characterSelection">
             <tr>
                 <th>
                     <div class="b">
@@ -43,20 +43,13 @@
                 </th>
             </tr>
             <tr>
-                <td onclick="createAccount()"><img id="Archer" src="Sprites\Archer_1 x10.png"><img id="Archer_Walk"
-                        src="Sprites\Archer_1 Walk v2 x10.gif"></td>
-                <td><img id="Knight" src="Sprites\Knight_1 x10.png"><img id="Knight_Walk"
-                        src="Sprites/Knight_1 walk v1 7fps x10.gif"></td>
-                <td><img id="Wizard" src="Sprites/Wizard_1 x10.png"><img id="Wizard_Walk"
-                        src="Sprites/Wizard_1  walk v1 x10.gif"></td>
+                <td onclick="createAccount('archer')"><img id="Archer" src="res/menu/characters/stationary/Archer.png"><img id="Archer_Walk" src="res/menu/characters/walking/Archer.gif"></td>
+                <td onclick=" createAccount('knight')"><img id="Knight" src="res/menu/characters/stationary/Knight.png"><img id="Knight_Walk" src="res/menu/characters/walking/Knight.gif"></td>
+                <td onclick=" createAccount('wizard')"><img id="Wizard" src="res/menu/characters/stationary/Wizard.png"><img id="Wizard_Walk" src="res/menu/characters/walking/Wizard.gif"></td>
             </tr>
-            
-                
-            
         </table>
-        <table id = "accountStuff">
+        <table id="accountStuff">
             <tr>
-                <!-- Spooky shit be happening here -->
                 <td>
                     <input type="text" id="username" placeholder="Enter player name" />
                 </td>
