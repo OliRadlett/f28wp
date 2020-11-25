@@ -602,7 +602,6 @@ app.post("/verify", (request, response) => {
 app.post("/save", (request, response) => {
 
     let player = request.body.player;
-    console.log(player)
 
     MongoClient.connect(uri, (error, client) => {
 
