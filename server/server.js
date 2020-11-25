@@ -524,6 +524,16 @@ app.post("/verify", (request, response) => {
     let username = request.body.username;
     let token = request.body.token;
 
+    if (!username || !token) {
+
+        response.status(404);
+        response.send({
+            error: "Username or token missing"
+        });
+        return;
+
+    }
+
     MongoClient.connect(uri, (error, client) => {
 
         if (error)

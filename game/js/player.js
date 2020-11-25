@@ -18,11 +18,16 @@ class Player {
 
         let params = this.parse(window.location.search);
 
-        // this.username = params.get("username");
-        // this.token = params.get("token");
+        try {
 
-        this.username = params[0][1];
-        this.token = params[1][1];
+            this.username = params[0][1];
+            this.token = params[1][1];
+
+        } catch (error) {
+
+            window.location = "start_menu.html";
+
+        }
 
 
         callApi("POST", "http://localhost:8081/verify", {
@@ -47,6 +52,10 @@ class Player {
                     this.y = result.y;
 
                 }
+
+            } else {
+
+                window.location = "start_menu.html";
 
             }
 
