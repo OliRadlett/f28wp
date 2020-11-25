@@ -31,7 +31,7 @@ function createAccount() {
 
     callApi("POST", url, (data, status) => {
 
-        if (status == 200) {
+        if (status == 201) {
 
             window.location = "/game/index.html?username=" + data.username + "&token=" + data.token;
 
