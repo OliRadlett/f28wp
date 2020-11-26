@@ -13,9 +13,6 @@ class Player {
         // TODO Create the player element here inside the player class
         this.element = document.getElementById("player");
         this.collisionMask = document.body.appendChild(this.createCollisionMask());
-        this.element.style.backgroundImage = "url('res/classes/knight/player_walk_right.gif')";
-        document.getElementById("playerId").innerHTML = "Client id: " + id;
-
         let params = this.parse(window.location.search);
 
         try {
@@ -37,6 +34,24 @@ class Player {
 
             if (result.verified) {
 
+                document.getElementById("username").innerHTML = "Username: " + this.username;
+
+                this.class = result.class;
+
+                switch (result.class) {
+
+                    case "archer":
+                        this.element.style.backgroundImage = "url('res/classes/archer/player_walk_right.gif')";
+                        break;
+                    case "knight":
+                        this.element.style.backgroundImage = "url('res/classes/knight/player_walk_right.gif')";
+                        break;
+                    case "wizard":
+                        this.element.style.backgroundImage = "url('res/classes/wizard/player_walk_right.gif')";
+                        break;
+
+                }
+
                 if (result.newPlayer === true) {
 
                     let startingCoordinates = this.generateStartingCoordinates();
@@ -45,8 +60,6 @@ class Player {
                     this.y = startingCoordinates.y;
 
                 } else {
-
-                    console.log(result)
 
                     this.x = result.x;
                     this.y = result.y;
@@ -188,8 +201,19 @@ class Player {
 
         }
 
-        // Temp
-        this.element.style.backgroundImage = "url('res/classes/knight/player_walk_left.gif')";
+        switch (this.class) {
+
+            case "archer":
+                this.element.style.backgroundImage = "url('res/classes/archer/player_walk_left.gif')";
+                break;
+            case "knight":
+                this.element.style.backgroundImage = "url('res/classes/knight/player_walk_left.gif')";
+                break;
+            case "wizard":
+                this.element.style.backgroundImage = "url('res/classes/wizard/player_walk_left.gif')";
+                break;
+
+        }
         this.direction = this.directions.left;
 
     }
@@ -214,8 +238,19 @@ class Player {
 
         }
 
-        // Temp
-        this.element.style.backgroundImage = "url('res/classes/knight/player_walk_right.gif')";
+        switch (this.class) {
+
+            case "archer":
+                this.element.style.backgroundImage = "url('res/classes/archer/player_walk_right.gif')";
+                break;
+            case "knight":
+                this.element.style.backgroundImage = "url('res/classes/knight/player_walk_right.gif')";
+                break;
+            case "wizard":
+                this.element.style.backgroundImage = "url('res/classes/wizard/player_walk_right.gif')";
+                break;
+
+        }
         this.direction = this.directions.right;
 
 

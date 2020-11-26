@@ -5,6 +5,9 @@ body {
 
 }
 
+/* This makes the image move from left to right in a loop that repeats
+   using transform property to posotion the left image at the left
+   edge of the container when animation begins */
 @keyframes slide {
     0% {
         transform: translate3d(0, 0, 0);
@@ -15,10 +18,12 @@ body {
     }
 }
 
+/* Callig slide animation, animation property instructs the class
+   and uses slide animation runing it for 1 minute in a loop*/
 .sliding-background {
 
 
-    background-image: url(../Sprites/Cloud\ Background\ v2\ x5.png);
+    background-image: url(../res/menu/clouds.png);
     background-repeat: repeat-x;
 
 
@@ -27,7 +32,7 @@ body {
     animation: slide 60s linear infinite;
 }
 
-
+/* the container hides everything which is conyained outside of it */
 .container {
     overflow: hidden;
 
@@ -49,7 +54,8 @@ body {
     margin-top: -181px;
     margin-left: -499px;
 }
-#accountStuff{
+
+#accountStuff {
     background: rgba(220, 220, 220, 0.6);
 
     position: fixed;
