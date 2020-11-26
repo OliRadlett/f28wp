@@ -4,7 +4,6 @@ let UP = false;
 let DOWN = false;
 let LEFT = false;
 let RIGHT = false;
-//For the attack button
 let ATTACK = false;
 
 // TEMP!!!
@@ -138,29 +137,8 @@ function setupControls() {
 
 function initMultiplayer() {
 
-    // Very very basic
-    // All this will need redoing soon
-
-    // Verify player here
-
-    webSocket = new WebSocket("ws://localhost:8080");
-
     let playerID = Date.now();
 
-    webSocket.onopen = () => {
-
-        // VERY TEMPORARY
-        let message = {
-
-            type: "clientConnected",
-            id: playerID
-
-        };
-
-        webSocket.send(JSON.stringify(message));
-
-        start(playerID);
-
-    };
+    start(playerID);
 
 }

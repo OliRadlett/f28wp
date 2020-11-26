@@ -70,6 +70,12 @@ class Player {
 
                 }
 
+                webSocket.send(JSON.stringify({
+                    type: "setClass",
+                    id: this.id,
+                    class: this.class
+                }));
+
             } else {
 
                 window.location = "start_menu.html";

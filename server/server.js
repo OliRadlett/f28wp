@@ -9,6 +9,15 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
 const cryptojs = require("crypto-js");
 const readline = require("readline");
+const {
+    resolve
+} = require("path");
+const {
+    rejects
+} = require("assert");
+
+// I know this really really needs to not be in the repo but I'll do it soon
+const uri = "mongodb+srv://Oli:Java12345@f28wp.ofdqn.mongodb.net/f28wp?retryWrites=true&w=majority";
 
 // Game server
 
@@ -59,22 +68,60 @@ function isCommand(command) {
 
 }
 
+// When the server is restarted make sure there are at least 100 enemies
+MongoClient.connect(uri, (error, client) => {
 
-// Temp just to spawn in some enemies
-enemies.push({
-    // Idk if i like the length being calculated like this
-    id: enemies.length,
-    type: "melee",
-    x: 400,
-    y: 400
-});
+    if (error) {
 
-enemies.push({
-    // Idk if i like the length being calculated like this
-    id: enemies.length,
-    type: "melee",
-    x: 600,
-    y: 700
+        console.log(error);
+        return;
+
+    }
+
+    const database = client.db('f28wp');
+    const collection = database.collection('enemies');
+
+    collection.countDocuments((error, result) => {
+
+        if (error) {
+
+            console.log(error);
+            return;
+
+        }
+
+        if (result < 100) {
+
+            for (let i = result; i < 100; i++) {
+
+                let x = Math.floor((Math.random() * 13888) + 1664);
+                let y = Math.floor((Math.random() * 14528) + 512);
+
+                enemies.push({
+                    // Idk if i like the length being calculated like this
+                    id: enemies.length,
+                    type: "melee",
+                    x: x,
+                    y: y
+                });
+
+            }
+
+            collection.insertMany(enemies, (error, result) => {
+
+                if (error) {
+
+                    console.log(error);
+                    return;
+
+                }
+
+            });
+
+        }
+
+    });
+
 });
 
 // Client tracking allows the server socket to create a set to keep track of all client connections
@@ -105,13 +152,19 @@ ServerSocket.on("connection", ws => {
 
         switch (message.type) {
 
+            case "setClass":
+                ws.class = message.class;
+                break;
+
             case "clientConnected":
                 console.log("Client connected with id " + message.id);
                 ws.id = message.id;
                 ws.position = {
-                    x: 0,
-                    y: 0
+                    x: message.x,
+                    y: message.y
                 };
+                ws.class = message.class;
+
                 for (let client of ServerSocket.clients) {
 
                     if (message.id != client.id) {
@@ -119,8 +172,9 @@ ServerSocket.on("connection", ws => {
                         client.send(JSON.stringify({
                             type: "clientConnected",
                             id: message.id,
-                            x: 0,
-                            y: 0
+                            x: message.x,
+                            y: message.y,
+                            class: message.class
                         }));
 
                     }
@@ -139,14 +193,19 @@ ServerSocket.on("connection", ws => {
                         currentClients.clients.push({
                             id: client.id,
                             x: client.position.x,
-                            y: client.position.y
+                            y: client.position.y,
+                            class: message.class
                         });
 
                     }
 
                 }
 
+                // ws represents the client that just connected
+                // currentClients contains the clients that were connected at the time ws connected
+
                 ws.send(JSON.stringify(currentClients));
+                console.log(JSON.stringify(currentClients));
                 // Send over enemies array
                 ws.send(JSON.stringify({
                     type: "syncEnemies",
@@ -288,8 +347,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 // Don't commit with the password like this
-const uri = "mongodb+srv://Oli:Java12345@f28wp.ofdqn.mongodb.net/f28wp?retryWrites=true&w=majority";
-
 
 // Remember to do some kind of input validation here
 // Theres probably a npm module for this

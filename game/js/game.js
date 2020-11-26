@@ -19,8 +19,22 @@ function start(playerID) {
 
     // Use parseMap as a promise to make sure the map is parsed before the player is created so we can use map data in the player constructor
     map.parseMap().then(() => {
-        player = new Player(playerID);
 
+        player = new Player(playerID);
+        webSocket = new WebSocket("ws://localhost:8080");
+        webSocket.onopen = () => {
+
+            let message = {
+
+                type: "clientConnected",
+                id: playerID,
+                x: player.x,
+                y: player.y
+
+            };
+
+            webSocket.send(JSON.stringify(message));
+        }
 
         /*
         TEMP - this all needs moving to a seperate function which can be called inside this promise
@@ -37,8 +51,8 @@ function start(playerID) {
 
                 type: "playerCoords",
                 id: player.getID,
-                x: player.getX,
-                y: player.getY
+                x: player.x,
+                y: player.y
 
             }));
 
@@ -49,8 +63,8 @@ function start(playerID) {
             let p = {
                 username: player.username,
                 token: player.token,
-                x: player.getX,
-                y: player.getY
+                x: player.x,
+                y: player.y
                 // etc
             };
 
@@ -84,7 +98,8 @@ function start(playerID) {
                     createClient({
                         id: message.id,
                         x: message.x,
-                        y: message.y
+                        y: message.y,
+                        class: message.class
                     });
                     break;
 
@@ -106,6 +121,10 @@ function start(playerID) {
 
                 case "synchroniseClients":
 
+                    // I think this bit might be the problem
+
+                    console.log("Syncing clients")
+
                     for (let i = 0; i < message.clients.length; i++) {
 
                         let client = message.clients[i];
@@ -115,7 +134,8 @@ function start(playerID) {
                             createClient({
                                 id: client.id,
                                 x: client.x,
-                                y: client.y
+                                y: client.y,
+                                class: message.class
                             });
 
                         }
@@ -125,6 +145,7 @@ function start(playerID) {
                     break;
 
                 case "syncEnemies":
+                    // alert("Recieved sync enemies")
                     for (i = 0; i < message.enemies.length; i++) {
 
                         // console.log(message.enemies[i]);
@@ -241,8 +262,8 @@ function update(delta) {
     // Update client positions
     for (i = 0; i < clients.length; i++) {
 
-        clients[i].element.style.top = clients[i].getY + "px";
-        clients[i].element.style.left = clients[i].getX + "px";
+        clients[i].element.style.top = clients[i].y + "px";
+        clients[i].element.style.left = clients[i].x + "px";
 
     }
 

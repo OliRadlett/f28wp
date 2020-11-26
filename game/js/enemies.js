@@ -77,7 +77,6 @@ class Enemy {
 
         // We'll want to preload the assets somehow instead of loading things every we spawn an enemy
 
-        element.style.backgroundImage = "url('res/classes/knight/player_walk_right.gif')";
         element.className = "enemy";
         element.style.top = this.y + "px";
         element.style.left = this.x + "px";
@@ -86,6 +85,7 @@ class Enemy {
         element.style.position = "absolute";
         element.style.zIndex = 10;
         element.style.backgroundRepeat = "no-repeat";
+        element.style.backgroundSize = "64px 64px";
 
         return element;
 
@@ -99,10 +99,12 @@ class Enemy {
         if (Math.floor(this.x) > player.x) {
 
             this.x = this.x - this.speed;
+            this.element.style.backgroundImage = "url(res/classes/enemies/melee/walking_left.gif)";
 
         } else if (Math.floor(this.x) < player.x) {
 
             this.x = this.x + this.speed;
+            this.element.style.backgroundImage = "url(res/classes/enemies/melee/walking_right.gif)";
 
         }
 
@@ -165,6 +167,7 @@ class Ranged extends Enemy {
         } else {
 
             this.moving = false;
+            this.element.style.backgroundImage = "url(res/classes/enemies/melee/standing_left.png)";
 
         }
 
@@ -182,6 +185,8 @@ class Melee extends Enemy {
         this.vision = 400;
         this.speed = 0.7;
 
+        this.element.style.backgroundImage = "url(res/classes/enemies/melee/standing_left.png)";
+
         this.element.classList.add("melee");
 
     }
@@ -195,6 +200,21 @@ class Melee extends Enemy {
         } else {
 
             this.moving = false;
+
+        }
+
+        let rect1 = this.element.getBoundingClientRect();
+
+        for (let i = 0; i < projectiles.length; i++) {
+
+            let rect2 = projectiles[i].element.getBoundingClientRect();
+
+            if (!(rect1.right < rect2.left || rect1.left > rect2.right || rect1.bottom < rect2.top || rect1.top > rect2.bottom)) {
+
+                // "delete" enemy (sorry this was just doe the demo I'd do it properly with more time)
+                enemies_class[this.id].element.style.opacity = 0;
+
+            }
 
         }
 
