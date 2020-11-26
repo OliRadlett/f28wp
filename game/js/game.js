@@ -5,6 +5,8 @@ let map;
 let enemies = [];
 let enemies_class = [];
 
+let projectiles = [];
+
 
 let interval = 1; // We use 1ms for LAN but we need this to be higher when the server is on the internet or it'll just lag
 
@@ -249,6 +251,13 @@ function update(delta) {
 
         enemies_class[i].updatePos();
         enemies_class[i].update();
+
+    }
+
+    // Update projectiles
+    for (i = 0; i < projectiles.length; i++) {
+
+        projectiles[i].update();
 
     }
 

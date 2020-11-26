@@ -13,6 +13,10 @@ class Player {
         // TODO Create the player element here inside the player class
         this.element = document.getElementById("player");
         this.collisionMask = document.body.appendChild(this.createCollisionMask());
+
+        document.addEventListener("click", this.attack.bind(this), false);
+        // document.addEventListener("mousemove", this.attack.bind(this), false);
+
         let params = this.parse(window.location.search);
 
         try {
@@ -277,6 +281,14 @@ class Player {
         return e;
 
     }
+
+    attack(e) {
+
+        projectiles.push(new Projectile(this.x, this.y, e.pageX, e.pageY, this.class));
+
+    }
+
+
 
     // TODO Rename getters and setters in the form below
     /*
