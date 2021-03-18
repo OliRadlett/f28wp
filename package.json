@@ -5,7 +5,7 @@
         "test": "test"
     },
     "dependencies": {
-        "jasmine": "^3.6.3",
+        "jasmine": "^3.7.0",
         "nodom": "^2.4.0"
     },
     "devDependencies": {
